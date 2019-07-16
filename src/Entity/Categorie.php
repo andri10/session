@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
+use App\Entity\Module;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
@@ -24,9 +26,9 @@ class Categorie
     private $Intitule;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formateur", mappedBy="formateurs")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="users")
      */
-    private $formateurs;
+    private $users;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="categorie")
@@ -35,7 +37,7 @@ class Categorie
 
     public function __construct()
     {
-        $this->formateurs = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->modules = new ArrayCollection();
     }
 
@@ -57,28 +59,28 @@ class Categorie
     }
 
     /**
-     * @return Collection|Formateur[]
+     * @return Collection|User[]
      */
-    public function getFormateurs(): Collection
+    public function getUsers(): Collection
     {
-        return $this->formateurs;
+        return $this->users;
     }
 
-    public function addFormateur(Formateur $formateur): self
+    public function addUser(User $user): self
     {
-        if (!$this->formateurs->contains($formateur)) {
-            $this->formateurs[] = $formateur;
-            $formateur->addFormateur($this);
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addUser($this);
         }
 
         return $this;
     }
 
-    public function removeFormateur(Formateur $formateur): self
+    public function removeUser(User $user): self
     {
-        if ($this->formateurs->contains($formateur)) {
-            $this->formateurs->removeElement($formateur);
-            $formateur->removeFormateur($this);
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeUser($this);
         }
 
         return $this;

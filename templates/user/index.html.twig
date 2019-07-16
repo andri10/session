@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+            <th scope="col">FORMATEUR</th>
+            <th scope="col">MAIL</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">PHOTO</th>
+            <th scope="col">FICHE PERSO</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+            <td>{{ user.nom ~ ' ' ~ user.prenom }}</td>
+            <td>{{ user.email}}</td>
+            <td>{{ user.telephone}}</td>
+            <td><img class="rounded-circle" src="{{ user.avatar }}" width="50" alt=""></td>
+            <td><a href="{{ path('user', {'id': user.id}) }}"><button type="button" class="btn btn-info">Voir Profil</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
