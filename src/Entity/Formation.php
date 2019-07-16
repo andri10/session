@@ -53,6 +53,11 @@ class Formation
      */
     private $duree;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateFin;
+
     public function __construct()
     {
         $this->ressources = new ArrayCollection();
@@ -196,6 +201,17 @@ class Formation
                 $duree->setFormation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateFin() {
+        return $this->DateDebut->modify('+20 day');
+    }
+
+    public function setDateFin(\DateTimeInterface $dateFin): self
+    {
+        $this->dateFin = $dateFin;
 
         return $this;
     }

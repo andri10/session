@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    Stagiaire : 
+    {{ stagiaire.nom }} {{ stagiaire.prenom }} - {{ stagiaire.dateNaissance | date('d/m/Y') }} - {{ stagiaire.age }} ans
+
+    <br><br>
+
+    <h3>Sessions prévues</h3>
+
+    {% for formation in stagiaire.stagiaires %}
+        {{ formation.intitule }} (du {{ formation.dateDebut | date('d/m/Y') }} au {{ formation.dateFin | date('d/m/Y') }} )
+        <br>
+    {% endfor %}
+
+{% endblock %}
+

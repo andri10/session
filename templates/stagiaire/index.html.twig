@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StagiaireController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>{{ controller_name }}</h1>
+
+    {% for stagiaire in stagiaires %}
+
+        <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom }}</a> <br>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

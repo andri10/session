@@ -169,6 +169,13 @@ class Stagiaire
         return $this;
     }
 
+    public function getAge()
+    {
+        $dateInterval = $this->DateNaissance->diff(new \DateTime());
+
+        return $dateInterval->y;
+    }
+
     /**
      * @return Collection|Formation[]
      */
