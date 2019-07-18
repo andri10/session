@@ -1,17 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StagiaireController!{% endblock %}
+{% block title %}Hello StagiaireController!
+{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>{{ controller_name }}</h1>
+<a href="{{ path('add_stagiaire')}}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Ajouter un Stagiaire</a>
 
-    {% for stagiaire in stagiaires %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">STAGIAIRE</th>
+            <th scope="col">MAIL</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">FICHE PERSO</th>
+            <th scope="col">SUPPRIMER</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stagiaire in stagiaires %}
+            <tr>
+                <td>{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</td>
+                <td>{{ stagiaire.mail}}</td>
+                <td>{{ stagiaire.telephone}}</td>
+                <td>
+                    <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">
+                        <button class="btn btn-info" type="button">Voir Profil</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">
+                        <button class="btn btn-danger" type="button">Supprimer</button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-        <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom }}</a> <br>
-
-    {% endfor %}
-
-</div>
 {% endblock %}
+

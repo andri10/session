@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if editMode %}
+    <h2> Modifier le formateur</h2>
+    {% else %}
+    <h2> Ajout d'un formateur</h2>
+{% endif %}
+    {{form(form)}}
+{% endblock %}

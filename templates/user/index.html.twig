@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Formateurs{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('add_users')}}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Ajouter un Formateur</a>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+            <th scope="col">FORMATEUR</th>
+            <th scope="col">MAIL</th>
+            <th scope="col">TELEPHONE</th>
+            <th scope="col">PHOTO</th>
+            <th scope="col">FICHE PERSO</th>
+            <th scope="col">SUPPRIMER</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+            <td>{{ user.nom ~ ' ' ~ user.prenom }}</td>
+            <td>{{ user.email}}</td>
+            <td>{{ user.telephone}}</td>
+            <td><img class="rounded-circle" src="{{ user.avatar }}" width="50" alt=""></td>
+            <td><a href="{{ path('user', {'id': user.id}) }}"><button type="button" class="btn btn-info">Voir Profil</button></a></td>
+            <td><a href="{{ path('delete_user', {'id': user.id}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
