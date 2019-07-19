@@ -61,10 +61,13 @@ class FormationController extends AbstractController
     /**
      * @Route("/addstagiaire", name="addStagiaire_formation")
      */
-    public function addStagiaire(Request $request, ObjectManager $manager)
+    public function addStagiaire(Formation $formation, Request $request, ObjectManager $manager)
     {
 
-        $form = $this->createFormBuilder(FormationType::class, $formation);
+        $form = $this->createFormBuilder($formation)
+                     ->add('stagiaires')
+                     ->add('save', SubmitType::class, ['label' => 'ADD'])
+                     ->getForm();
 
         $form->handleRequest($request);
 
