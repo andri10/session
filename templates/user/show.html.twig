@@ -19,8 +19,23 @@ Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere.
 
     <h3>Catégories enseignées :</h3>
 
-    {% for categorie in user.users %}
-        <p>{{ categorie.intitule }}</p>
-    {% endfor %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Plus</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for categorie in user.users %}
+                <tr>
+                    <td>{{ categorie.intitule }}</td>
+                    <td><a href="{{ path('show_categorie', {'id' : categorie.id})}}"><button type="button" class="btn btn-info">Détails</button></a></td>
+                </tr>
+            {% endfor %}  
+        </tbody>
+    </table>
 
 {% endblock %}
+
