@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Serializable;
 use App\Entity\Categorie;
 use Doctrine\ORM\Mapping as ORM;
@@ -316,6 +317,13 @@ class User implements UserInterface, \Serializable {
         if ($this->users->contains($user)) {
             $this->users->removeElement($user);
         }
+
+        return $this;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }

@@ -3,6 +3,24 @@
 
 {% block body %}
 
-<h2> {{ user.nom ~ ' ' ~ user.prenom }} </h2>
+<h2 style="text-align:center"> {{ user.nom ~ ' ' ~ user.prenom }} </h2>
+<div style="text-align:center"><a href="{{ path('edit_users', {'id': user.id}) }}" class="btn btn-success" role="button" aria-pressed="true">Modfifier les infos</a></div>
 
+<img class="rounded-circle center" src="{{ user.avatar }}" width="200" alt="">
+<div style="text-align:center">
+<p>Présentation</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+Duis fermentum a dui sit amet vestibulum. Quisque consequat posuere lacus, a vulputate felis viverra ut. 
+Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere. 
+</p>
+</div>
+
+<br><br>
+
+    <h3>Catégories enseignées :</h3>
+{#
+    {% for categorie in user.categories %}
+        <p>{{ categorie.intitule }}</p>
+    {% endfor %}
+#}
 {% endblock %}

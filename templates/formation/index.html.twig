@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Formations{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('add_formation') }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Ajouter une formation</a>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Intitulé Session</th>
+                <th scope="col">Date début</th>
+                <th scope="col">Date fin </th>
+                <th scope="col">NB Place theoriques </th>
+                <th scope="col">NB Place réservées </th>
+                <th scope="col">NB Place restantes </th>
+                <th scope="col">Détails Formation </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formation in formations %}
+                <tr>
+                    <td>{{ formation.intitule }}</td>
+                    <td>{{ formation.dateDebut|date('d/m/Y')  }}</td>
+                    <td>{{ formation.dateFin|date('d/m/Y')  }}</td>
+                    <td>{{ formation.nbPlace }}</td>
+                    <td>{{ formation.stagiaires | length }}</td>
+                    <td>{{ formation.nbPlace - formation.stagiaires | length }}</td>
+                    <td><a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">Détails</button></a></td>
+                </tr>
+            {% endfor %}  
+        </tbody>
+    </table>
+
+{% endblock %}
+
+ 

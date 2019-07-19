@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2 style="text-align:center">
+        {{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}
+    </h2>
+    <div style="text-align:center">
+        <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}" class="btn btn-success" role="button" aria-pressed="true">Modfifier les infos</a>
+    </div>
+
+    <img class="rounded-circle center" src="{{ stagiaire.avatar }}" width="200" alt="">
+    <div style="text-align:center">
+        <p>Présentation</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Duis fermentum a dui sit amet vestibulum. Quisque consequat posuere lacus, a vulputate felis viverra ut. 
+            Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere.
+        </p>
+    </div>
+
+    <br><br>
+
+    <h3>Sessions prévues</h3>
+
+    {% for formation in stagiaire.stagiaires %}
+        {{ formation.intitule }} (du {{ formation.dateDebut | date('d/m/Y') }} au {{ formation.dateFin | date('d/m/Y') }} )
+        <br>
+    {% endfor %}
+
+{% endblock %}

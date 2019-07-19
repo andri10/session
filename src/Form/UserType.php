@@ -34,7 +34,7 @@ class UserType extends AbstractType {
                 ->add('ville', TextType::class)
                 ->add('telephone', TextType::class)
                 ->add('avatar', UrlType::class)
-                ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
+                
         ;
     }
 }

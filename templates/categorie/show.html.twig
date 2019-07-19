@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <a href="{{ path('add_module', {'id': categorie.id}) }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Ajouter un module</a>
+    <br>
+    <h4>{{ categorie.intitule}}</h4>
+
+    {% for module in categorie.modules %}
+        {{ module.intitule }}
+        <br>
+    {% endfor %}
+
+{% endblock %}
+
