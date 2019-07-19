@@ -50,7 +50,7 @@ class CategorieController extends AbstractController
             ]);
         }
 
-        return $this->render('categorie/add.html.twig', [
+        return $this->render('categorie/add_edit.html.twig', [
             'controller_name' => 'CategorieController',
             'form' => $form->createView()
         ]);
@@ -103,10 +103,22 @@ class CategorieController extends AbstractController
     /**
      * @Route("/delete/{id}", name="delete_categorie")
      */
-    public function delete(ObjectManager $manager, Categorie $categorie){
+    public function deleteCategorie(ObjectManager $manager, Categorie $categorie){
         $manager->remove($categorie);
         $manager->flush();
 
         return $this->redirectToRoute('categorie');
+    }
+
+    /**
+     * @Route("/deletemodule/{id}", name="delete_module")
+     */
+    public function deleteModule(ObjectManager $manager, Module $module, Categorie $categorie){
+        $manager->remove($module);
+        $manager->flush();
+
+        return $this->redirectToRoute('show_categorie', [
+            'id' => $categorie->getId()
+        ]);
     }
 }

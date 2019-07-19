@@ -29,7 +29,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}">
+                    <a href="{{ path('delete_stagiaire', {'id': stagiaire.id}) }}" onclick="Supp(this.href); return(false)">
                         <button class="btn btn-danger" type="button">Supprimer</button>
                     </a>
                 </td>

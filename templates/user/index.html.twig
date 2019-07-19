@@ -25,7 +25,7 @@
             <td>{{ user.telephone}}</td>
             <td><img class="rounded-circle" src="{{ user.avatar }}" width="50" alt=""></td>
             <td><a href="{{ path('user', {'id': user.id}) }}"><button type="button" class="btn btn-info">Voir Profil</button></a></td>
-            <td><a href="{{ path('delete_user', {'id': user.id}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+            <td><a href="{{ path('delete_user', {'id': user.id}) }}" onclick="Supp(this.href); return(false)"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
             </tr>
         {% endfor %}
         </tbody>
