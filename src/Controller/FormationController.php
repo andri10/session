@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -44,7 +45,7 @@ class FormationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $formation->setStagiaires($form->get("stagiaires")->getData());
             $manager->persist($formation);
             $manager->flush();
 
@@ -59,7 +60,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/addstagiaire", name="addStagiaire_formation")
+     * @Route("/{id}/addstagiaire", name="addStagiaire_formation")
      */
     public function addStagiaire(Formation $formation, Request $request, ObjectManager $manager)
     {

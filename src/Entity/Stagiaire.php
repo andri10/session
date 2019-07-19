@@ -59,13 +59,13 @@ class Stagiaire
     private $Avatar;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", inversedBy="stagiaires")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="stagiaires")
      */
-    private $stagiaires;
+    private $formations;
 
     public function __construct()
     {
-        $this->stagiaires = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,6 +83,10 @@ class Stagiaire
         $this->Nom = $Nom;
 
         return $this;
+    }
+
+    public function getNomPrenom(){
+        return $this->Nom." ".$this->Prenom;
     }
 
     public function getPrenom(): ?string
@@ -176,27 +180,35 @@ class Stagiaire
         return $dateInterval->y;
     }
 
+    
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
     /**
      * @return Collection|Formation[]
      */
-    public function getStagiaires(): Collection
+    public function getFormations(): Collection
     {
-        return $this->stagiaires;
+        return $this->formations;
     }
 
-    public function addStagiaire(Formation $stagiaire): self
+    public function addFormation(Formation $formation): self
     {
-        if (!$this->stagiaires->contains($stagiaire)) {
-            $this->stagiaires[] = $stagiaire;
+        if (!$this->formations->contains($formation)) {
+            $this->formations[] = $formation;
+            $formation->addStagiaire($this);
         }
 
         return $this;
     }
 
-    public function removeStagiaire(Formation $stagiaire): self
+    public function removeFormation(Formation $formation): self
     {
-        if ($this->stagiaires->contains($stagiaire)) {
-            $this->stagiaires->removeElement($stagiaire);
+        if ($this->formations->contains($formation)) {
+            $this->formations->removeElement($formation);
+            $formation->removeStagiaire($this);
         }
 
         return $this;

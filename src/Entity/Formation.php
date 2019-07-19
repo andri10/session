@@ -44,7 +44,7 @@ class Formation
     private $ressources;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", mappedBy="stagiaires")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", inversedBy="formations")
      */
     private $stagiaires;
 
@@ -146,33 +146,13 @@ class Formation
         return $this;
     }
 
-    /**
-     * @return Collection|Stagiaire[]
-     */
-    public function getStagiaires(): Collection
+   
+
+    public function setStagiaires($stagiaires)
     {
-        return $this->stagiaires;
+        $this->stagiaires = $stagiaires;
     }
 
-    public function addStagiaire(Stagiaire $stagiaire): self
-    {
-        if (!$this->stagiaires->contains($stagiaire)) {
-            $this->stagiaires[] = $stagiaire;
-            $stagiaire->addStagiaire($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStagiaire(Stagiaire $stagiaire): self
-    {
-        if ($this->stagiaires->contains($stagiaire)) {
-            $this->stagiaires->removeElement($stagiaire);
-            $stagiaire->removeStagiaire($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Duree[]
@@ -216,4 +196,31 @@ class Formation
 
         return $this;
     }
+
+    /**
+     * @return Collection|Stagiaire[]
+     */
+    public function getStagiaires(): Collection
+    {
+        return $this->stagiaires;
+    }
+
+    public function addStagiaire(Stagiaire $stagiaire): self
+    {
+        if (!$this->stagiaires->contains($stagiaire)) {
+            $this->stagiaires[] = $stagiaire;
+        }
+
+        return $this;
+    }
+
+    public function removeStagiaire(Stagiaire $stagiaire): self
+    {
+        if ($this->stagiaires->contains($stagiaire)) {
+            $this->stagiaires->removeElement($stagiaire);
+        }
+
+        return $this;
+    }
+
 }
