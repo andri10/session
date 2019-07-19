@@ -51,7 +51,7 @@ class Formation
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Duree", mappedBy="formation")
      */
-    private $duree;
+    private $durees;
 
     /**
      * @ORM\Column(type="date")
@@ -62,7 +62,7 @@ class Formation
     {
         $this->ressources = new ArrayCollection();
         $this->stagiaires = new ArrayCollection();
-        $this->duree = new ArrayCollection();
+        $this->durees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,15 +177,15 @@ class Formation
     /**
      * @return Collection|Duree[]
      */
-    public function getDuree(): Collection
+    public function getDurees(): Collection
     {
-        return $this->duree;
+        return $this->durees;
     }
 
     public function addDuree(Duree $duree): self
     {
-        if (!$this->duree->contains($duree)) {
-            $this->duree[] = $duree;
+        if (!$this->durees->contains($duree)) {
+            $this->durees[] = $duree;
             $duree->setFormation($this);
         }
 
@@ -194,8 +194,8 @@ class Formation
 
     public function removeDuree(Duree $duree): self
     {
-        if ($this->duree->contains($duree)) {
-            $this->duree->removeElement($duree);
+        if ($this->durees->contains($duree)) {
+            $this->durees->removeElement($duree);
             // set the owning side to null (unless already changed)
             if ($duree->getFormation() === $this) {
                 $duree->setFormation(null);
@@ -205,7 +205,8 @@ class Formation
         return $this;
     }
 
-    public function getDateFin() {
+    public function getDateFin()
+    {
         return $this->DateDebut;
     }
 
