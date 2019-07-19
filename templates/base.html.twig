@@ -14,6 +14,12 @@
             {# custom #}
             <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
             <script src="https://kit.fontawesome.com/6277cc7eb0.js"></script>
+            <script type="text/javascript">
+            function Supp(link){
+            if(confirm('Confirmer la suppression ?')) {
+                document.location.href = link;
+            }}
+            </script>
 
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
