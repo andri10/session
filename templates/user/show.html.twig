@@ -18,9 +18,9 @@ Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere.
 <br><br>
 
     <h3>Catégories enseignées :</h3>
-{#
-    {% for categorie in user.categories %}
+
+    {% for categorie in user.users %}
         <p>{{ categorie.intitule }}</p>
     {% endfor %}
-#}
+
 {% endblock %}

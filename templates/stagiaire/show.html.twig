@@ -22,7 +22,7 @@
 
     <h3>Sessions prévues</h3>
 
-    {% for formation in stagiaire.stagiaires %}
+    {% for formation in stagiaire.formations %}
         {{ formation.intitule }} (du {{ formation.dateDebut | date('d/m/Y') }} au {{ formation.dateFin | date('d/m/Y') }} )
         <br>
     {% endfor %}
