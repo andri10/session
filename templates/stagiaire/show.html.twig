@@ -22,9 +22,27 @@
 
     <h3>Sessions prévues</h3>
 
-    {% for formation in stagiaire.formations %}
-        {{ formation.intitule }} (du {{ formation.dateDebut | date('d/m/Y') }} au {{ formation.dateFin | date('d/m/Y') }} )
-        <br>
-    {% endfor %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Intitulé</th>
+                <th scope="col">Date début</th>
+                <th scope="col">Date fin</th>
+                <th scope="col">Plus</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for formation in stagiaire.formations %}
+                <tr>
+                    <td>{{ formation.intitule }}</td>
+                    <td>{{ formation.dateDebut | date('d/m/Y') }}</td>
+                    <td>{{ formation.dateFin | date('d/m/Y') }}</td>
+                    <td><a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">Détails</button></a></td>
+                </tr>
+            {% endfor %}  
+        </tbody>
+    </table>
 
 {% endblock %}
+
