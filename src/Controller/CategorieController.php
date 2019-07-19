@@ -64,7 +64,8 @@ class CategorieController extends AbstractController
 
         $module = new Module();
 
-        $form = $this->createForm(ModuleType::class, $module);
+        $form = $this->createForm(ModuleType::class, $module)
+        ->add('submit', SubmitType::class, ['label'=>'Ajouter', 'attr'=>['class'=>'btn-primary btn-block']]);
 
         $form->handleRequest($request);
 
