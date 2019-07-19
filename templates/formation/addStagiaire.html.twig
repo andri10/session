@@ -1,6 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form(form) }}
+
+    {{ form_start(form) }}
+
+    <h3>Stagiaires</h3>
+
+    <label maxNb="" type="hidden">NbPlace max {{ formation.NbPlace }}</label>
+
+    <ul id="collections" data-prototype="{{ form_row(form.stagiaires.vars.prototype)|e('html_attr') }}">
+        {# iterate over each existing tag and render its only field: name #}
+        {% for stagiaire in form.stagiaires %}
+            <li>{{ form_row(stagiaire) }}</li>
+        {% endfor %}
+    </ul>
+
+    {{ form_row(form.save) }}
+
+    {{ form_end(form) }}
+
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/collectionHandler.js"></script>
+
+{% endblock %}

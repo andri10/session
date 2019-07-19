@@ -3,13 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Formation;
+use App\Entity\Stagiaire;
 use App\Form\FormationType;
+use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -20,11 +25,9 @@ class FormationController extends AbstractController
     /**
      * @Route("/", name="formation")
      */
-    public function index()
+    public function index(FormationRepository $repo)
     {
-        $formations = $this->getDoctrine()
-        ->getRepository(Formation::class)
-        ->findAll();
+        $formations = $repo->findAll();
 
         return $this->render('formation/index.html.twig', [
             'controller_name' => 'FormationController',
@@ -32,12 +35,11 @@ class FormationController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/add", name="add_formation")
      */
     public function add(Request $request, ObjectManager $manager)
     {
-
         $formation = new Formation();
 
         $form = $this->createForm(FormationType::class, $formation);
@@ -45,7 +47,6 @@ class FormationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formation->setStagiaires($form->get("stagiaires")->getData());
             $manager->persist($formation);
             $manager->flush();
 
@@ -66,7 +67,22 @@ class FormationController extends AbstractController
     {
 
         $form = $this->createFormBuilder($formation)
-                     ->add('stagiaires')
+                     /* ->add('NbPlace', IntegerType::class, [
+                        "attr" => [
+                            "maxNb" => $formation->getNbPlace(),
+                            "disabled" => "disabled"
+                        ]
+                    ]) */
+                     ->add('stagiaires', CollectionType::class, [
+                        'entry_type' => EntityType::class,
+                        'entry_options' => [
+                            'label' => "choisir :",
+                            'class' => Stagiaire::class,
+                            'choice_label' => "nomPrenom"
+                        ],
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                    ])
                      ->add('save', SubmitType::class, ['label' => 'ADD'])
                      ->getForm();
 
@@ -82,8 +98,9 @@ class FormationController extends AbstractController
             ]);
         }
 
-        return $this->render('formation/add_edit.html.twig', [
+        return $this->render('formation/addStagiaire.html.twig', [
             'form' => $form->createView(),
+            'formation' => $formation
         ]);
     }
 
