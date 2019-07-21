@@ -23,15 +23,15 @@ class Categorie
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Intitule;
+    private $intitule;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="categories")
      */
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Module", mappedBy="categorie", orphanRemoval=true)
      */
     private $modules;
 
@@ -48,40 +48,12 @@ class Categorie
 
     public function getIntitule(): ?string
     {
-        return $this->Intitule;
+        return $this->intitule;
     }
 
-    public function setIntitule(string $Intitule): self
+    public function setIntitule(string $intitule): self
     {
-        $this->Intitule = $Intitule;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removeUser($this);
-        }
+        $this->intitule = $intitule;
 
         return $this;
     }
@@ -116,4 +88,37 @@ class Categorie
 
         return $this;
     }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->intitule;
+    }
+
 }

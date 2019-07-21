@@ -6,16 +6,20 @@ use App\Entity\Module;
 use App\Form\ModuleType;
 use App\Entity\Categorie;
 use App\Form\CategorieType;
+use App\Repository\CategorieRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/categorie")
+ */
 class CategorieController extends AbstractController
 {
     /**
-     * @Route("/categorie", name="categorie")
+     * @Route("/", name="categorie")
      */
     public function index()
     {
@@ -30,19 +34,24 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/categorie/add", name="add_categorie")
+     * @Route("/add", name="add_categorie")
      */
     public function addCategorie(Request $request, ObjectManager $manager){
 
         $categorie = new Categorie();
+
         $form = $this->createForm(CategorieType::class, $categorie)
-        ->add('submit', SubmitType::class, ['label'=>'Ajouter', 'attr'=>['class'=>'btn-primary btn-block']]);
+                     ->add('submit', SubmitType::class, [
+                         'label'=>'Ajouter',
+                         'attr'=>['class'=>'btn-primary btn-block']]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $manager->persist($categorie);
             $manager->flush();
+
             $this->addFlash('success', 'Votre catégorie a bien été créée.');
 
             return $this->redirectToRoute('show_categorie', [
@@ -86,17 +95,18 @@ class CategorieController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/categorie/{id}", name="show_categorie")
-     */
-    public function show(Categorie $categorie)
-    {
-        $categories = $this->getDoctrine()
-        ->getRepository(Categorie::class)
-        ->findAll();
+    
 
-        return $this->render('categorie/show.html.twig', [
-            'categorie' => $categorie
+    /**
+     * @Route("/delete/module/{id}", name="delete_module")
+     */
+    public function deleteModule(ObjectManager $manager, Module $module){
+
+        $manager->remove($module);
+        $manager->flush();
+
+        return $this->redirectToRoute('show_categorie', [
+            'id' => $module->getCategorie()->getId()
         ]);
     }
 
@@ -111,14 +121,17 @@ class CategorieController extends AbstractController
     }
 
     /**
-     * @Route("/deletemodule/{id}", name="delete_module")
+     * @Route("/{id}", name="show_categorie")
      */
-    public function deleteModule(ObjectManager $manager, Module $module, Categorie $categorie){
-        $manager->remove($module);
-        $manager->flush();
+    public function show(Categorie $categorie)
+    {
+        $categories = $this->getDoctrine()
+        ->getRepository(Categorie::class)
+        ->findAll();
 
-        return $this->redirectToRoute('show_categorie', [
-            'id' => $categorie->getId()
+        return $this->render('categorie/show.html.twig', [
+            'categorie' => $categorie
         ]);
     }
+
 }

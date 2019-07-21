@@ -21,7 +21,7 @@ class Module
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Intitule;
+    private $intitule;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="modules")
@@ -45,12 +45,12 @@ class Module
 
     public function getIntitule(): ?string
     {
-        return $this->Intitule;
+        return $this->intitule;
     }
 
-    public function setIntitule(string $Intitule): self
+    public function setIntitule(string $intitule): self
     {
-        $this->Intitule = $Intitule;
+        $this->intitule = $intitule;
 
         return $this;
     }
@@ -97,4 +97,5 @@ class Module
 
         return $this;
     }
+
 }

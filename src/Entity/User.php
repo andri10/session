@@ -60,51 +60,52 @@ class User implements UserInterface, \Serializable {
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Nom;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Prenom;
+    private $prenom;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
-    private $DateNaissance;
+    private $dateNaissance;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Sexe;
+    private $sexe;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Adresse;
+    private $adresse;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Ville;
+    private $ville;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Telephone;
+    private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Avatar;
+    private $avatar;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", inversedBy="users")
      */
-    private $users;
+    private $categories;
 
     public function __construct() {
         $this->users = new ArrayCollection();
         $this->isActive = true;
+        $this->categories = new ArrayCollection();
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -140,100 +141,100 @@ class User implements UserInterface, \Serializable {
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): self
+    public function setNom(string $nom): self
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): self
+    public function setPrenom(string $prenom): self
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     public function getDateNaissance(): ?\DateTimeInterface
     {
-        return $this->DateNaissance;
+        return $this->dateNaissance;
     }
 
-    public function setDateNaissance(\DateTimeInterface $DateNaissance): self
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
     {
-        $this->DateNaissance = $DateNaissance;
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
     }
 
     public function getSexe(): ?string
     {
-        return $this->Sexe;
+        return $this->sexe;
     }
 
-    public function setSexe(string $Sexe): self
+    public function setSexe(string $sexe): self
     {
-        $this->Sexe = $Sexe;
+        $this->sexe = $sexe;
 
         return $this;
     }
 
     public function getAdresse(): ?string
     {
-        return $this->Adresse;
+        return $this->adresse;
     }
 
-    public function setAdresse(string $Adresse): self
+    public function setAdresse(string $adresse): self
     {
-        $this->Adresse = $Adresse;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
     public function getVille(): ?string
     {
-        return $this->Ville;
+        return $this->ville;
     }
 
-    public function setVille(string $Ville): self
+    public function setVille(string $ville): self
     {
-        $this->Ville = $Ville;
+        $this->ville = $ville;
 
         return $this;
     }
 
-
     public function getTelephone(): ?string
     {
-        return $this->Telephone;
+        return $this->telephone;
     }
 
-    public function setTelephone(string $Telephone): self
+    public function setTelephone(string $telephone): self
     {
-        $this->Telephone = $Telephone;
+        $this->telephone = $telephone;
 
         return $this;
     }
 
     public function getAvatar(): ?string
     {
-        return $this->Avatar;
+        return $this->avatar;
     }
 
-    public function setAvatar(string $Avatar): self
+    public function setAvatar(string $avatar): self
     {
-        $this->Avatar = $Avatar;
+        $this->avatar = $avatar;
 
         return $this;
     }
+
 
     public function eraseCredentials() {
         
@@ -295,35 +296,35 @@ class User implements UserInterface, \Serializable {
         $this->isActive = $isActive;
     }
 
-    /**
-     * @return Collection|Categorie[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(Categorie $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Categorie $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-        }
-
-        return $this;
-    }
-
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
 
         return $this;
     }

@@ -13,14 +13,14 @@ class StagiaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Nom')
-            ->add('Prenom')
-            ->add('DateNaissance')
-            ->add('Sexe')
-            ->add('Ville')
-            ->add('Mail')
-            ->add('Telephone')
-            ->add('Avatar')
+            ->add('nom')
+            ->add('prenom')
+            ->add('dateNaissance')
+            ->add('sexe')
+            ->add('ville')
+            ->add('mail')
+            ->add('telephone')
+            ->add('avatar')
             /* ->add('stagiaires') */
             ->add('submit', SubmitType::class, ['label' => 'Add', 'attr' => ['class' => 'btn-info']])
 

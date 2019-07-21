@@ -21,25 +21,25 @@ class Formation
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Intitule;
+    private $intitule;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $Presentation;
+    private $presentation;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $NbPlace;
+    private $nbPlace;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
-    private $DateDebut;
+    private $dateDebut;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Ressource", mappedBy="ressources")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Ressource", inversedBy="formations")
      */
     private $ressources;
 
@@ -72,48 +72,60 @@ class Formation
 
     public function getIntitule(): ?string
     {
-        return $this->Intitule;
+        return $this->intitule;
     }
 
-    public function setIntitule(string $Intitule): self
+    public function setIntitule(string $intitule): self
     {
-        $this->Intitule = $Intitule;
+        $this->intitule = $intitule;
 
         return $this;
     }
 
     public function getPresentation(): ?string
     {
-        return $this->Presentation;
+        return $this->presentation;
     }
 
-    public function setPresentation(string $Presentation): self
+    public function setPresentation(string $presentation): self
     {
-        $this->Presentation = $Presentation;
+        $this->presentation = $presentation;
 
         return $this;
     }
 
     public function getNbPlace(): ?int
     {
-        return $this->NbPlace;
+        return $this->nbPlace;
     }
 
-    public function setNbPlace(int $NbPlace): self
+    public function setNbPlace(int $nbPlace): self
     {
-        $this->NbPlace = $NbPlace;
+        $this->nbPlace = $nbPlace;
 
         return $this;
     }
 
     public function getDateDebut(): ?\DateTimeInterface
     {
-        return $this->DateDebut;
+        return $this->dateDebut;
     }
 
-    public function setDateDebut(\DateTimeInterface $DateDebut): self
+    public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
-        $this->DateDebut = $DateDebut;
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->dateFin;
+    }
+
+    public function setDateFin(\DateTimeInterface $dateFin): self
+    {
+        $this->dateFin = $dateFin;
 
         return $this;
     }
@@ -146,13 +158,10 @@ class Formation
         return $this;
     }
 
-   
-
     public function setStagiaires($stagiaires)
     {
         $this->stagiaires = $stagiaires;
     }
-
 
     /**
      * @return Collection|Duree[]
@@ -181,18 +190,6 @@ class Formation
                 $duree->setFormation(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getDateFin()
-    {
-        return $this->DateDebut;
-    }
-
-    public function setDateFin(\DateTimeInterface $dateFin): self
-    {
-        $this->dateFin = $dateFin;
 
         return $this;
     }

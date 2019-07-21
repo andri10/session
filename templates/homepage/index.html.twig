@@ -1,27 +1,70 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+  {{ parent() }}
+
+  <!-- Material Design Bootstrap -->
+  <link href="/assets/css/mdb.min.css" rel="stylesheet">
+  
+{% endblock %}
+
 {% block body %}
 
-<h1 style="text-align:center"> Bienvenue sur DeaL One ! </h1>
 
-<img src="http://lorempixel.com/400/200/" class="center"/>
 
-<div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-Duis fermentum a dui sit amet vestibulum. Quisque consequat posuere lacus, a vulputate felis viverra ut. 
-Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere. 
-Quisque elit justo, pellentesque vitae nisi vel, iaculis iaculis diam. Donec convallis nunc mi, eu placerat 
-metus aliquam non. Sed volutpat urna eget luctus viverra. Fusce sagittis bibendum nisl. 
-Proin ultrices magna vitae lectus suscipit, sed posuere ante malesuada. Nam efficitur, mauris non congue pharetra, 
-arcu mauris pretium dolor, vel vulputate justo nibh nec nulla. Proin eu aliquet dui. Aenean blandit ante et turpis sagittis, 
-et dignissim nisi sollicitudin.</p>
+  <!-- Section: Live preview -->
+    <section>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-Duis fermentum a dui sit amet vestibulum. Quisque consequat posuere lacus, a vulputate felis viverra ut. 
-Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere. 
-Quisque elit justo, pellentesque vitae nisi vel, iaculis iaculis diam. Donec convallis nunc mi, eu placerat 
-metus aliquam non. Sed volutpat urna eget luctus viverra. Fusce sagittis bibendum nisl. 
-Proin ultrices magna vitae lectus suscipit, sed posuere ante malesuada. Nam efficitur, mauris non congue pharetra, 
-arcu mauris pretium dolor, vel vulputate justo nibh nec nulla. Proin eu aliquet dui. Aenean blandit ante et turpis sagittis, 
-et dignissim nisi sollicitudin.</p></div>
+      <!-- Grid row -->
+      <div class="row mx-1">
+
+        <!-- Grid column -->
+        <div class="col-md-12 mb-4">
+
+          <!-- Card -->
+          <div class="card card-cascade wider reverse">
+
+            <!-- Card image -->
+            <div class="view view-cascade overlay">
+              <img class="card-img-top" src="/assets/images/dashboard/DealOne/twitter_header_photo_2.png" alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body card-body-cascade text-center amber lighten-5">
+
+              <!-- Title -->
+              <h4 class="card-header-title mb-3"><strong>Deal One</strong></h4>
+              <!-- Subtitle -->
+              <h6 class="font-weight-bold indigo-text py-2">FORMATION</h6>
+              <!-- Text -->
+              <p class="card-header-subtitle mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem perspiciatis
+                voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit, placeat
+                laborum ut beatae ullam suscipit veniam.
+              </p>
+
+              <!-- Linkedin -->
+              <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
+              <!-- Twitter -->
+              <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
+              <!-- Dribbble -->
+              <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
+
+            </div>
+
+          </div>
+          <!-- Card -->
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </section>
+  <!-- Section: Live preview -->
+
 {% endblock %}

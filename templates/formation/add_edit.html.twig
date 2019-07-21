@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
 
     {{ form_start(form) }}
 
-    {{ form_row(form.Intitule) }}
-    {{ form_row(form.Presentation) }}
-    {{ form_row(form.NbPlace) }}
-    {{ form_row(form.DateDebut) }}
+    {{ form_row(form.intitule) }}
+    {{ form_row(form.presentation) }}
+    {{ form_row(form.nbPlace) }}
+    {{ form_row(form.dateDebut) }}
     {{ form_row(form.dateFin) }}
 
     <h3>Stagiaires</h3>
@@ -20,9 +23,15 @@
         {% endfor %}
     </ul>
 
+    {{ form_row(form.ressources) }}
+
     {{ form_row(form.submit) }}
 
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false}) }}
+
+    </div>    </div>
+    </div>
+
 
 {% endblock %}
 

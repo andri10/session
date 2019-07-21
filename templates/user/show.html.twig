@@ -3,39 +3,133 @@
 
 {% block body %}
 
-<h2 style="text-align:center"> {{ user.nom ~ ' ' ~ user.prenom }} </h2>
-<div style="text-align:center"><a href="{{ path('edit_users', {'id': user.id}) }}" class="btn btn-success" role="button" aria-pressed="true">Modfifier les infos</a></div>
+<style>
+.user-profile .side-left .card .avatar img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-<img class="rounded-circle center" src="{{ user.avatar }}" width="200" alt="">
-<div style="text-align:center">
-<p>Présentation</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-Duis fermentum a dui sit amet vestibulum. Quisque consequat posuere lacus, a vulputate felis viverra ut. 
-Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere. 
-</p>
-</div>
+.user-profile .side-left .card .avatar .designation {
+    text-align: center;
+    color: #434a54;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
 
-<br><br>
+.user-profile .side-left .card .avatar .name {
+    text-align: center;
+    color: #32323d;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+</style>
 
-    <h3>Catégories enseignées :</h3>
+<div class="content-wrapper">
+          <div class="row user-profile">
+            <div class="col-lg-4 side-left d-flex align-items-stretch">
+              <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body avatar">
+                      <h4 class="card-title">Info</h4>
+                      <hr>
+                      <img class="rounded-circle" src="{{ user.avatar }}" width="100" alt="">
+                      <p class="name">{{ user.nom ~ ' ' ~ user.prenom }}</p>
+                      <p class="designation">-  Formateur  -</p>
+                      <a class="d-block text-center text-dark" href="#">{{ user.email }}</a>
+                      <a class="d-block text-center text-dark" href="#">{{ user.telephone }}</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 stretch-card">
+                  <div class="card">
+                    <div class="card-body overview">
+                      <div class="wrapper about-user">
+                        <h4 class="card-title mt-4 mb-3">About</h4>
+                        <hr>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam consectetur ex quod.
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam consectetur ex quod.</p>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Intitulé</th>
-                <th scope="col">Plus</th>
+                      </div>
+                      <h4>Catégories enseignées :</h4>
+                      <div class="info-links">
+                          <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Intitulé</th>
+                                    <th scope="col">Plus</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            {% for categorie in user.users %}
-                <tr>
-                    <td>{{ categorie.intitule }}</td>
-                    <td><a href="{{ path('show_categorie', {'id' : categorie.id})}}"><button type="button" class="btn btn-info">Détails</button></a></td>
-                </tr>
-            {% endfor %}  
-        </tbody>
-    </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for categorie in user.categories %}
+                                    <tr>
+                                        <td>{{ categorie.intitule }}</td>
+                                        <td>
+                                            <a href="{{ path('show_categorie', {'id' : categorie.id})}}"><button type="button" class="btn btn-info">Détails</button></a>
+                                            <a href="{{ path('deleteCategorie_user', {'id': categorie.id}) }}" onclick="Supp(this.href); return(false)" class="btn btn-danger">Supprimer</a>
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}  
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 side-right stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+                    <h4 class="card-title mb-0">Details</h4>
+                  </div>
+                  <div class="wrapper">
+                    <hr>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+                        <form action="#">
+                          <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Change user name">
+                          </div>
+                          <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input type="text" class="form-control" id="designation" placeholder="Change designation">
+                          </div>
+                          <div class="form-group">
+                            <label for="mobile">Mobile Number</label>
+                            <input type="text" class="form-control" id="mobile" placeholder="Change mobile number">
+                          </div>
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Change email address">
+                          </div>
+                          <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea name="address" id="address" rows="6" class="form-control" placeholder="Change address"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="website">Website URL</label>
+                            <input type="text" class="form-control" id="website" placeholder="Change website url">
+                          </div>
+                          <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-success mr-2">Update</button>
+                            <button class="btn btn-outline-danger">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 {% endblock %}
 

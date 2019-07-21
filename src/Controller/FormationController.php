@@ -47,6 +47,7 @@ class FormationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $manager->persist($formation);
             $manager->flush();
 
@@ -56,7 +57,7 @@ class FormationController extends AbstractController
         }
 
         return $this->render('formation/add_edit.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -102,6 +103,17 @@ class FormationController extends AbstractController
             'form' => $form->createView(),
             'formation' => $formation
         ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete_formation")
+     */
+    public function delete(Formation $formation, ObjectManager $manager)
+    {
+        $manager->remove($formation);
+        $manager->flush();
+
+        return $this->redirectToRoute('formation');
     }
 
     /**

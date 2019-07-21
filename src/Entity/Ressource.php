@@ -21,21 +21,21 @@ class Ressource
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Intitule;
+    private $intitule;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $Quantite;
+    private $quantite;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", inversedBy="ressources")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="ressources")
      */
-    private $ressources;
+    private $formations;
 
     public function __construct()
     {
-        $this->ressources = new ArrayCollection();
+        $this->formations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -45,51 +45,59 @@ class Ressource
 
     public function getIntitule(): ?string
     {
-        return $this->Intitule;
+        return $this->intitule;
     }
 
-    public function setIntitule(string $Intitule): self
+    public function setIntitule(string $intitule): self
     {
-        $this->Intitule = $Intitule;
+        $this->intitule = $intitule;
 
         return $this;
     }
 
     public function getQuantite(): ?int
     {
-        return $this->Quantite;
+        return $this->quantite;
     }
 
-    public function setQuantite(int $Quantite): self
+    public function setQuantite(int $quantite): self
     {
-        $this->Quantite = $Quantite;
+        $this->quantite = $quantite;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->intitule;
     }
 
     /**
      * @return Collection|Formation[]
      */
-    public function getRessources(): Collection
+    public function getFormations(): Collection
     {
-        return $this->ressources;
+        return $this->formations;
     }
 
-    public function addRessource(Formation $ressource): self
+    public function addFormation(Formation $formation): self
     {
-        if (!$this->ressources->contains($ressource)) {
-            $this->ressources[] = $ressource;
+        if (!$this->formations->contains($formation)) {
+            $this->formations[] = $formation;
+            $formation->addRessource($this);
         }
 
         return $this;
     }
 
-    public function removeRessource(Formation $ressource): self
+    public function removeFormation(Formation $formation): self
     {
-        if ($this->ressources->contains($ressource)) {
-            $this->ressources->removeElement($ressource);
+        if ($this->formations->contains($formation)) {
+            $this->formations->removeElement($formation);
+            $formation->removeRessource($this);
         }
 
         return $this;
     }
+
 }

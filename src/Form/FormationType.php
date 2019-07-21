@@ -19,16 +19,16 @@ class FormationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Intitule')
-            ->add('Presentation')
-            ->add('NbPlace', IntegerType::class, [
+            ->add('intitule')
+            ->add('presentation')
+            ->add('nbPlace', IntegerType::class, [
                 "attr" => [
                     "maxNb" => null
                 ]
             ])
-            ->add('DateDebut')
+            ->add('dateDebut')
             ->add('dateFin')
-            // ->add('ressources')
+            
             ->add('stagiaires', CollectionType::class, [
                 'entry_type' => EntityType::class,
                 'entry_options' => [
@@ -39,6 +39,7 @@ class FormationType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
+            ->add('ressources')
             ->add('submit', SubmitType::class, ['label' => 'Valider', 'attr' => ['class' => 'btn-info']])
 
         ;

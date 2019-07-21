@@ -21,42 +21,42 @@ class Stagiaire
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Nom;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Prenom;
+    private $prenom;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
-    private $DateNaissance;
+    private $dateNaissance;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Sexe;
+    private $sexe;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Ville;
+    private $ville;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $Mail;
+    private $mail;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $Telephone;
+    private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $Avatar;
+    private $avatar;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="stagiaires")
@@ -75,115 +75,110 @@ class Stagiaire
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): self
+    public function setNom(string $nom): self
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getNomPrenom(){
-        return $this->Nom." ".$this->Prenom;
-    }
-
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): self
+    public function setPrenom(string $prenom): self
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     public function getDateNaissance(): ?\DateTimeInterface
     {
-        return $this->DateNaissance;
+        return $this->dateNaissance;
     }
 
-    public function setDateNaissance(\DateTimeInterface $DateNaissance): self
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
     {
-        $this->DateNaissance = $DateNaissance;
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
     }
 
     public function getSexe(): ?string
     {
-        return $this->Sexe;
+        return $this->sexe;
     }
 
-    public function setSexe(string $Sexe): self
+    public function setSexe(string $sexe): self
     {
-        $this->Sexe = $Sexe;
+        $this->sexe = $sexe;
 
         return $this;
     }
 
     public function getVille(): ?string
     {
-        return $this->Ville;
+        return $this->ville;
     }
 
-    public function setVille(string $Ville): self
+    public function setVille(string $ville): self
     {
-        $this->Ville = $Ville;
+        $this->ville = $ville;
 
         return $this;
     }
 
     public function getMail(): ?string
     {
-        return $this->Mail;
+        return $this->mail;
     }
 
-    public function setMail(string $Mail): self
+    public function setMail(string $mail): self
     {
-        $this->Mail = $Mail;
+        $this->mail = $mail;
 
         return $this;
     }
 
     public function getTelephone(): ?string
     {
-        return $this->Telephone;
+        return $this->telephone;
     }
 
-    public function setTelephone(string $Telephone): self
+    public function setTelephone(string $telephone): self
     {
-        $this->Telephone = $Telephone;
+        $this->telephone = $telephone;
 
         return $this;
     }
 
     public function getAvatar(): ?string
     {
-        return $this->Avatar;
+        return $this->avatar;
     }
 
-    public function setAvatar(string $Avatar): self
+    public function setAvatar(string $avatar): self
     {
-        $this->Avatar = $Avatar;
+        $this->avatar = $avatar;
 
         return $this;
     }
 
     public function getAge()
     {
-        $dateInterval = $this->DateNaissance->diff(new \DateTime());
+        $dateInterval = $this->dateNaissance->diff(new \DateTime());
 
         return $dateInterval->y;
     }
 
-    
-    public function __toString()
-    {
-        return $this->getNom();
+    // ajouter relation avec le JS
+    public function getNomPrenom(){
+        return $this->nom." ".$this->prenom;
     }
 
     /**
@@ -213,4 +208,5 @@ class Stagiaire
 
         return $this;
     }
+
 }

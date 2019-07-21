@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.categories) }}
+
+    {{ form_row(form.save) }}
+
+    {{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}
+

@@ -29,7 +29,6 @@ class StagiaireController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/add", name="add_stagiaire")
      * @Route("/edit/{id}", name="edit_stagiaire")

@@ -2,27 +2,53 @@
 
 {% block body %}
 
-    <h2 style="text-align:center">
-        {{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}
-    </h2>
-    <div style="text-align:center">
-        <a href="{{ path('edit_stagiaire', {'id': stagiaire.id}) }}" class="btn btn-success" role="button" aria-pressed="true">Modfifier les infos</a>
-    </div>
+<style>
+.user-profile .side-left .card .avatar img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-    <img class="rounded-circle center" src="{{ stagiaire.avatar }}" width="200" alt="">
-    <div style="text-align:center">
-        <p>Présentation</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Duis fermentum a dui sit amet vestibulum. Quisque consequat posuere lacus, a vulputate felis viverra ut. 
-            Integer in fermentum ante. Duis interdum vitae mauris dapibus posuere.
-        </p>
-    </div>
+.user-profile .side-left .card .avatar .designation {
+    text-align: center;
+    color: #434a54;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
 
-    <br><br>
+.user-profile .side-left .card .avatar .name {
+    text-align: center;
+    color: #32323d;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+</style>
 
-    <h3>Sessions prévues</h3>
-
-    <table class="table table-hover">
+<div class="content-wrapper">
+          <div class="row user-profile">
+            <div class="col-lg-4 side-left d-flex align-items-stretch">
+              <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body avatar">
+                      <h4 class="card-title">Info</h4>
+                      <hr>
+                      <img class="rounded-circle" src="{{ stagiaire.avatar }}" width="100" alt="">
+                      <p class="name">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</p>
+                      <p class="designation">-  Stagiaire  -</p>
+                      <a class="d-block text-center text-dark" href="#">{{ stagiaire.mail }}</a>
+                      <a class="d-block text-center text-dark" href="#">{{ stagiaire.telephone }}</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 stretch-card">
+                  <div class="card">
+                    <div class="card-body overview">
+                      <div class="wrapper about-user">
+                        <h4 class="card-title mt-4 mb-3">Sessions prévues</h4>
+                        <hr>
+                        <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Intitulé</th>
@@ -35,14 +61,73 @@
         <tbody>
             {% for formation in stagiaire.formations %}
                 <tr>
-                    <td>{{ formation.intitule }}</td>
+                    <td><small>{{ formation.intitule }}</small></td>
                     <td>{{ formation.dateDebut | date('d/m/Y') }}</td>
                     <td>{{ formation.dateFin | date('d/m/Y') }}</td>
-                    <td><a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">Détails</button></a></td>
+                    <td><a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">-</button></a></td>
                 </tr>
             {% endfor %}  
         </tbody>
     </table>
+
+                      </div>
+                      <div class="info-links">
+                                                <h4 class="card-title mt-4 mb-3">Sessions terminés :</h4>
+Null
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 side-right stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+                    <h4 class="card-title mb-0">Details</h4>
+                  </div>
+                  <div class="wrapper">
+                    <hr>
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+                        <form action="#">
+                          <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Change user name">
+                          </div>
+                          <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input type="text" class="form-control" id="designation" placeholder="Change designation">
+                          </div>
+                          <div class="form-group">
+                            <label for="mobile">Mobile Number</label>
+                            <input type="text" class="form-control" id="mobile" placeholder="Change mobile number">
+                          </div>
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Change email address">
+                          </div>
+                          <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea name="address" id="address" rows="6" class="form-control" placeholder="Change address"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="website">Website URL</label>
+                            <input type="text" class="form-control" id="website" placeholder="Change website url">
+                          </div>
+                          <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-success mr-2">Update</button>
+                            <button class="btn btn-outline-danger">Cancel</button>
+                          </div>
+                        </form>
+                      </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 {% endblock %}
 

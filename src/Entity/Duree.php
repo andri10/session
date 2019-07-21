@@ -19,7 +19,7 @@ class Duree
     /**
      * @ORM\Column(type="integer")
      */
-    private $NbJour;
+    private $nbJour;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Module", inversedBy="duree")
@@ -38,12 +38,12 @@ class Duree
 
     public function getNbJour(): ?int
     {
-        return $this->NbJour;
+        return $this->nbJour;
     }
 
-    public function setNbJour(int $NbJour): self
+    public function setNbJour(int $nbJour): self
     {
-        $this->NbJour = $NbJour;
+        $this->nbJour = $nbJour;
 
         return $this;
     }
@@ -71,4 +71,5 @@ class Duree
 
         return $this;
     }
+
 }
