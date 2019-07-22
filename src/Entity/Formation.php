@@ -49,7 +49,7 @@ class Formation
     private $stagiaires;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Duree", mappedBy="formation", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Duree", mappedBy="formation", cascade={"persist"}, orphanRemoval=true)
      */
     private $durees;
 
