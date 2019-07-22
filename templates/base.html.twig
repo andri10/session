@@ -46,7 +46,7 @@
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
             <a class="navbar-brand brand-logo" href="#">
-                <img src="/assets/images/logo.png" alt="logo" /> </a>
+                <img src="/assets/images/Logo_dealone.png" alt="logo" /> </a>
             <a class="navbar-brand brand-logo-mini" href="#">
                 <img src="/assets/images/logo-mini.svg" alt="logo" /> </a>
             </div>
@@ -171,11 +171,11 @@
                     </div>
                     <div class="text-wrapper">
                     <p class="profile-name">Allen Moreno</p>
-                    <p class="designation">Premium user</p>
+                    <p class="designation">Utilisateur actuel</p>
                     </div>
                 </a>
                 </li>
-                <li class="nav-item nav-category">Main Menu</li>
+                <li class="nav-item nav-category">Menu Principal</li>
                 <li class="nav-item">
                 <a class="nav-link" href="{{ path('home') }}">
                     <i class="menu-icon typcn typcn-document-text"></i>
@@ -195,7 +195,7 @@
                         <a class="nav-link" href="{{path('formation')}}">Liste</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Add</a>
+                        <a class="nav-link" href="{{ path('add_formation')}}">Ajouter une formation</a>
                     </li>
                     </ul>
                 </div>
@@ -213,7 +213,7 @@
                         <a class="nav-link" href="{{path('get_all_users')}}">Liste</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Add</a>
+                        <a class="nav-link" href="{{ path('add_users')}}">Ajouter un formateur</a>
                     </li>
                     </ul>
                 </div>
@@ -231,7 +231,7 @@
                         <a class="nav-link" href="{{path('stagiaire')}}">Liste</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Add</a>
+                        <a class="nav-link" href="{{ path('add_stagiaire')}}">Ajouter un stagiaire</a>
                     </li>
                     </ul>
                 </div>
