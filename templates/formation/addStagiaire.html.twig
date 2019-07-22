@@ -2,16 +2,22 @@
 
 {% block body %}
 
+    <style>
+        li{
+            list-style: none;
+        }
+    </style>
+
     {{ form_start(form) }}
 
-    <h3>Stagiaires</h3>
+    <h3>Ajouter les Stagiaires</h3>
 
-    <label maxNb="" type="hidden">NbPlace max {{ formation.NbPlace }}</label>
+    <input type="hidden" id="maxNb" value={{ formation.nbPlace }}></input>
 
     <ul id="collections" data-prototype="{{ form_row(form.stagiaires.vars.prototype)|e('html_attr') }}">
         {# iterate over each existing tag and render its only field: name #}
         {% for stagiaire in form.stagiaires %}
-            <li>{{ form_row(stagiaire) }}</li>
+            <li id="collection">{{ form_row(stagiaire) }}</li>
         {% endfor %}
     </ul>
 

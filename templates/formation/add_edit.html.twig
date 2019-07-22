@@ -5,29 +5,21 @@
         <div class="card">
             <div class="card-body">
 
-                {{ form_start(form) }}
+                {# {{ form_start(form) }}
 
                 {{ form_row(form.intitule) }}
                 {{ form_row(form.presentation) }}
                 {{ form_row(form.nbPlace) }}
                 {{ form_row(form.dateDebut) }}
                 {{ form_row(form.dateFin) }}
-
-                <h3>Stagiaires</h3>
-
-
-                <ul id="collections" data-prototype="{{ form_row(form.stagiaires.vars.prototype)|e('html_attr') }}">
-                    {# iterate over each existing tag and render its only field: name #}
-                    {% for stagiaire in form.stagiaires %}
-                        <li>{{ form_row(stagiaire) }}</li>
-                    {% endfor %}
-                </ul>
-
-                {{ form_row(form.ressources) }}
-
                 {{ form_row(form.submit) }}
 
-                {{ form_end(form, {'render_rest': false}) }}
+                {# Mystère
+                {{ form_row(form._token) }}
+
+                {{ form_end(form) }} #}
+
+                {{form(form)}}
 
             </div>
         </div>
