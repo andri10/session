@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Duree;
 use App\Entity\Formation;
 use App\Entity\Stagiaire;
+use App\Form\ModulesType;
 use App\Form\FormationType;
 use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +14,7 @@ use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -70,22 +73,43 @@ class FormationController extends AbstractController
     {
         
         $form = $this->createFormBuilder($formation)
-                     ->add('stagiaires'/* , CollectionType::class, [
-                        'entry_type' => EntityType::class,
+                     ->add('stagiaires', EntityType::class, [
+                        'class'=> Stagiaire::class,
                         'attr' => [
-                            'class' => "browser-default custom-select"
-                        ],
-                        'entry_options' => [
-                            'label' => "choisir :",
-                            'class' => Stagiaire::class,
-                            'choice_label' => "nomPrenom"
-                        ],
-                        'allow_add' => true,
-                        'allow_delete' => true,
-                    ] */)
+                            'class' => 'selectpicker'
+                         ],
+                        /* 'multiple'=> true, */
+                     ])
                      ->add('save', SubmitType::class, ['label' => 'ADD'])
                      ->getForm();
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $formation->addStagiaire($formation);
+
+            $manager->persist($formation);
+            $manager->flush();
+
+            return $this->redirectToRoute('show_formation', [
+                'id' => $formation->getId()
+            ]);
+        }
+
+        return $this->render('formation/addStagiaire.html.twig', [
+            'form' => $form->createView(),
+            'formation' => $formation
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/addmodule", name="addModule_formation")
+     */
+    public function addModule(Formation $formation, Request $request, ObjectManager $manager)
+    {
+
+        $form = $this->createForm(ModulesType::class, $formation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -98,7 +122,7 @@ class FormationController extends AbstractController
             ]);
         }
 
-        return $this->render('formation/addStagiaire.html.twig', [
+        return $this->render('formation/addModule.html.twig', [
             'form' => $form->createView(),
             'formation' => $formation
         ]);
