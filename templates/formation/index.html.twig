@@ -37,7 +37,6 @@
                         <th> NB Place réservées </th>
                         <th> NB Place restantes </th>
                         <th> Détails Formation </th>
-                        <th>  </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,7 +50,7 @@
                             <td>{{ formation.nbPlace - formation.stagiaires | length }}</td>
                             <td>
                                 <a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">-</button></a>
-                                <td><a href="{{ path('delete_formation', {'id': formation.id}) }}" onclick="Supp(this.href); return(false)"><button type="button" class="btn btn-danger">x</button></a></td>
+                                <a href="{{ path('delete_formation', {'id': formation.id}) }}" onclick="Supp(this.href); return(false)"><button type="button" class="btn btn-danger">x</button></a>
 
                             </td>
                         </tr>
