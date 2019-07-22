@@ -3,6 +3,22 @@
 
 {% block body %}
 
+<style>
+.map-container-6{
+overflow:hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+}
+.map-container-6 iframe{
+left:0;
+top:0;
+height:100%;
+width:100%;
+position:absolute;
+}
+
+</style>
 
 
   <!-- Section: Live preview -->
@@ -27,27 +43,33 @@
               </a>
             </div>
             <br>
-                        <div class="card-deck">
+
+              <div class="card-deck">
               <div class="card">
                 <img src="https://cdn.pixabay.com/photo/2015/05/15/01/48/computer-767776_1280.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Lorem ipsum</h5>
                   <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 </div>
+                <button type="button" class="btn btn blue-gradient btn-rounded waves-effect">Info</button>
               </div>
+              
               <div class="card">
                 <img src="https://cdn.pixabay.com/photo/2015/07/17/22/42/startup-849804_1280.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Lorem ipsum</h5>
                   <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
                 </div>
+                <button type="button" class="btn btn aqua-gradient btn-rounded waves-effect">Info</button>
               </div>
+
               <div class="card">
                 <img src="https://cdn.pixabay.com/photo/2015/07/17/22/44/student-849828_1280.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Lorem ipsum</h5>
                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
                 </div>
+                <button type="button" class="btn btn peach-gradient btn-rounded waves-effect">Info</button>
               </div>
             </div>
             <br><br>
@@ -65,13 +87,6 @@
                 laborum ut beatae ullam suscipit veniam.
               </p>
 
-              <!-- Linkedin -->
-              <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
-              <!-- Twitter -->
-              <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
-              <!-- Dribbble -->
-              <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
-
             </div>
 
           </div>
@@ -82,8 +97,81 @@
 
       </div>
       <!-- Grid row -->
-
+    <h2 class="h1-responsive font-weight-bold text-center my-5">L'équipe sur le projet</h2>
+    <!-- Section description -->
+    <p class="grey-text text-center w-responsive mx-auto mb-5">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit est laborum.</p>
+  
     </section>
   <!-- Section: Live preview -->
 
+  <div class="row">
+
+    <!--Grid column-->
+    <div class="col-lg-5 mb-4">
+
+      <!--Form with header-->
+      <div class="card">
+
+        <div class="card-body">
+          <!--Header-->
+          <div class="form-header blue accent-1">
+            <h3><i class="fas fa-envelope"></i> Contactez-nous</h3>
+          </div>
+
+          <p>Remplissez les champs ci-dessous :</p>
+          <br>
+
+          <!--Body-->
+          <div class="md-form">
+            <i class="fas fa-user prefix grey-text"></i>
+            <input type="text" id="form-name" class="form-control">
+            <label for="form-name">Votre nom</label>
+          </div>
+
+          <div class="md-form">
+            <i class="fas fa-envelope prefix grey-text"></i>
+            <input type="text" id="form-email" class="form-control">
+            <label for="form-email">Votre email</label>
+          </div>
+
+          <div class="md-form">
+            <i class="fas fa-tag prefix grey-text"></i>
+            <input type="text" id="form-Subject" class="form-control">
+            <label for="form-Subject">Sujet</label>
+          </div>
+
+          <div class="md-form">
+            <i class="fas fa-pencil-alt prefix grey-text"></i>
+            <textarea id="form-text" class="form-control md-textarea" rows="3"></textarea>
+            <label for="form-text">Votre demande</label>
+          </div>
+
+          <div class="text-center mt-4">
+            <button class="btn btn-light-blue">Envoyer</button>
+          </div>
+
+        </div>
+
+      </div>
+      <!--Form with header-->
+
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-lg-7">
+
+      <!--Google map-->
+      <div id="map-container-google-11" class="z-depth-1-half map-container-6" style="height: 400px">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d165.04140258169127!2d7.743410200618759!3d48.55885989613227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4796c9d9eaf735cb%3A0x3c2d52c629488b85!2sElan+Formation!5e0!3m2!1sfr!2sfr!4v1563798445408!5m2!1sfr!2sfr"
+          frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+
+      <br>
+    <!--Grid column-->
+
+  </div>
+
+</section>
+<!--Section: Contact v.1-->
 {% endblock %}
