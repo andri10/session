@@ -6,7 +6,7 @@
 
     <h3>Stagiaires</h3>
 
-    <label maxNb="" type="hidden">NbPlace max {{ formation.NbPlace }}</label>
+    <input type="hidden" id="maxNb" value"{{ formation.NbPlace }}"></input>
 
     <ul id="collections" data-prototype="{{ form_row(form.stagiaires.vars.prototype)|e('html_attr') }}">
         {# iterate over each existing tag and render its only field: name #}
