@@ -51,6 +51,8 @@ class FormationController extends AbstractController
             $manager->persist($formation);
             $manager->flush();
 
+            dump($formation);
+
             return $this->redirectToRoute('show_formation', [
                 'id' => $formation->getId()
             ]);
@@ -66,14 +68,8 @@ class FormationController extends AbstractController
      */
     public function addStagiaire(Formation $formation, Request $request, ObjectManager $manager)
     {
-
+        
         $form = $this->createFormBuilder($formation)
-                     /* ->add('NbPlace', IntegerType::class, [
-                        "attr" => [
-                            "maxNb" => $formation->getNbPlace(),
-                            "disabled" => "disabled"
-                        ]
-                    ]) */
                      ->add('stagiaires', CollectionType::class, [
                         'entry_type' => EntityType::class,
                         'entry_options' => [
