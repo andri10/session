@@ -70,8 +70,11 @@ class FormationController extends AbstractController
     {
         
         $form = $this->createFormBuilder($formation)
-                     ->add('stagiaires', CollectionType::class, [
+                     ->add('stagiaires'/* , CollectionType::class, [
                         'entry_type' => EntityType::class,
+                        'attr' => [
+                            'class' => "browser-default custom-select"
+                        ],
                         'entry_options' => [
                             'label' => "choisir :",
                             'class' => Stagiaire::class,
@@ -79,7 +82,7 @@ class FormationController extends AbstractController
                         ],
                         'allow_add' => true,
                         'allow_delete' => true,
-                    ])
+                    ] */)
                      ->add('save', SubmitType::class, ['label' => 'ADD'])
                      ->getForm();
 

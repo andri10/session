@@ -45,7 +45,7 @@
         $collection.data('index', $collection.find(':input').length);
         $addCollectionButton.on('click', function(e) { // au clic sur le bouton ajouter
             //si la collection n'a pas encore autant d'élément que le maximum autorisé
-            if($collection.data('index') <= $("input[maxNb]").val()){
+            if($collection.data('index') <= $("#maxNb").val()){
                 //on appelle la fonction qui ajoute un nouveau champ
                 addCollectionForm($collection, $newLinkLi);
             }
