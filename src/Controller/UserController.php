@@ -91,33 +91,29 @@ class UserController extends AbstractController
     }
 
     /**
-     * * @Route("/{id}/add/Categorie", name="addCategorie_user")
+     * @Route("/{id}/addcategorie", name="addCategorie_user")
      */
-    public function addCategorie(Request $request, ObjectManager $manager, User $user) {
+    public function addCategoriee(User $user, Request $request, ObjectManager $manager)
+    {
         
         $form = $this->createFormBuilder($user)
-                     ->add('categories', EntityType::class, [
-                        // looks for choices from this entity
-                        'class' => Categorie::class,
-                    
-                        // uses the User.username property as the visible option string
-                        'choice_label' => 'intitule'
-                    
-                        // used to render a select box, check boxes or radios
-                        // 'multiple' => true,
-                        // 'expanded' => true,
-                        ])
+                     ->add('categories', CollectionType::class, [
+                        'entry_type' => EntityType::class,
+                        'entry_options' => [
+                            'label' => "choisir :",
+                            'class' => Categorie::class,
+                            'choice_label' => "intitule"
+                        ],
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                    ])
+                     ->add('save', SubmitType::class, ['label' => 'ADD'])
+                     ->getForm();
 
-                        ->add('save', SubmitType::class, ['label' => 'ADD'])
-                        ->getForm();
-
-                     $form->handleRequest($request);
+        $this->getUser()->setPlainPassword("danstoncul");
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $user->addCategory($form->get('categories')->getData());
-
-            dump($form->get('categories')->getData());
 
             $manager->persist($user);
             $manager->flush();
@@ -129,6 +125,7 @@ class UserController extends AbstractController
 
         return $this->render('user/add_categorie.html.twig', [
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 
