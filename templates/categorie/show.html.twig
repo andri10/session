@@ -4,13 +4,37 @@
 {% block body %}
     <a href="{{ path('add_module', {'id': categorie.id}) }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Ajouter un module</a>
     <br>
-    <h4>{{ categorie.intitule}}</h4>
 
-    {% for module in categorie.modules %}
-        <a href="{{ path('delete_module', {'id': module.id}) }}"><i class="far fa-trash-alt"></i></a>
-        {{ module.intitule }}
-        <br>
-    {% endfor %}
+    <!-- Editable table -->
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">{{ categorie.intitule}}</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+          <tr>
+            <th class="text-center">Module</th>
+            <th class="text-center">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for module in categorie.modules %}
+          <tr>
+          
+            <td class="pt-3-half" contenteditable="true">{{ module.intitule }}</td>
+            <td>
+              <a href="{{ path('delete_module', {'id': module.id}) }}" onclick="Supp(this.href); return(false)"><span class="table-remove"><button type="button"
+                  class="btn btn-danger btn-rounded btn-sm my-0">Supprimer</button></span></a>
+            </td>
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Editable table -->
 
 {% endblock %}
 

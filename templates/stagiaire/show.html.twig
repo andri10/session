@@ -34,11 +34,12 @@
                     <div class="card-body avatar">
                       <h4 class="card-title">Info</h4>
                       <hr>
-                      <img class="rounded-circle" src="{{ stagiaire.avatar }}" width="100" alt="">
+                      <img class="rounded-circle" src="{{ stagiaire.avatar }}" width="140" alt="">
                       <p class="name">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</p>
                       <p class="designation">-  Stagiaire  -</p>
-                      <a class="d-block text-center text-dark" href="#">{{ stagiaire.mail }}</a>
-                      <a class="d-block text-center text-dark" href="#">{{ stagiaire.telephone }}</a>
+                      <a class="d-block text-center text-dark" href="mailto:{{ stagiaire.mail }}">{{ stagiaire.mail }}</a>
+                      <a class="d-block text-center text-dark" href="tel:{{ stagiaire.telephone }}">{{ stagiaire.telephone }}</a>
+                      <a href="{{ path('edit_stagiaire', {'id' : stagiaire.id}) }}"><button type="button" class="btn btn-outline-danger btn-rounded waves-effect">Edit</button></a>
                     </div>
                   </div>
                 </div>
@@ -64,22 +65,19 @@
                     <td><small>{{ formation.intitule }}</small></td>
                     <td>{{ formation.dateDebut | date('d/m/Y') }}</td>
                     <td>{{ formation.dateFin | date('d/m/Y') }}</td>
-                    <td><a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">-</button></a></td>
+                    <td><a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">Détails</button></a></td>
                 </tr>
             {% endfor %}  
         </tbody>
     </table>
 
                       </div>
-                      <div class="info-links">
-                                                <h4 class="card-title mt-4 mb-3">Sessions terminés :</h4>
-Null
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <!--
             <div class="col-lg-8 side-right stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -124,6 +122,7 @@ Null
                       </div>
                   </div>
                 </div>
+                -->
               </div>
             </div>
           </div>
