@@ -32,11 +32,6 @@
                         <div class="form-group">
                             <p>{{ formation.presentation }}</p>
                         </div>
-                        {#
-                        {% for ressource in formation.ressources %}
-                        <h4>Salle : {{ ressource.intitule }}</h4>
-                        {% endfor %}
-                        #}
                         <a role="button" class="btn btn-outline-success" href="{{ path('edit_formation', {'id': formation.id}) }}"> Edit </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addStagiaire_formation', {'id': formation.id}) }}"> + Stagiaire </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addModule_formation', {'id': formation.id}) }}"> + Module </a>
@@ -106,6 +101,7 @@
                                             <a href="{{ path('deleteStagaire_formation', {'id': formation.id, 'idstagiaire': stagiaire.id}) }}">
                                                 <button class="btn btn-danger" type="button">x</button>
                                             </a>
+                                            <a href="{{ path('pdf', {'id': stagiaire.id}) }}" target="_blank">pdf</a>
                                         </td>
                                     </tr>
                                 {% endfor %}

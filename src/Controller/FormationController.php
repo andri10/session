@@ -21,6 +21,10 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
+// Include Dompdf required namespaces
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 /**
  * @Route("/formation")
  */
@@ -36,6 +40,39 @@ class FormationController extends AbstractController
         return $this->render('formation/index.html.twig', [
             'controller_name' => 'FormationController',
             'formations' => $formations
+        ]);
+    }
+
+    /**
+     * @Route("/stagiaire/{id}/pdf", name="pdf")
+     */
+    public function generationPdf(Stagiaire $stagiaire)
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('formation/mypdf.html.twig', [
+            'title' => "Welcome to our PDF Test",
+            'stagiaire' => $stagiaire
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
         ]);
     }
 

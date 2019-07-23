@@ -11,13 +11,13 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ categorie.intitule}}</h4>
+                        <h3>{{ categorie.intitule}}</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo mauris leo, non finibus nulla eleifend a. Sed nec ultricies nisi, vel condimentum dolor. Duis tincidunt consequat eros non eleifend. Suspendisse quis tristique lorem.
                         </p>
                         <a href="{{ path('show_categorie', {'id' : categorie.id})}}" class="btn btn-info">Détails</a>
                         <a href="{{ path('delete_categorie', {'id': categorie.id}) }}" onclick="Supp(this.href); return(false)" class="btn btn-danger">Supprimer</a>
                     </div>
-                </div>
+                </div><br>
             </div>
         {% endfor %}
     </div>
