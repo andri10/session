@@ -132,15 +132,18 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/delete/stagiaire/{id}", name="deleteStagaire_formation")
+     * @Route("/{idstagiaire}/delete/stagiaire", name="deleteStagaire_formation")
      */
-    public function deleteStagaire(Stagiaire $stagiaire, ObjectManager $manager, Formation $formation)
+    public function deleteStagaire(ObjectManager $manager, Stagiaire $stagiaire, Formation $formation)
     {
-        $formation->removeStagiaire($stagiaire);
+        
+        $stagiaire->removeFormation($formation);
 
         $manager->flush();
 
-        return $this->redirectToRoute('formation');
+        return $this->redirectToRoute('show_formation', [
+            'id' => $formation->getId()
+        ]);
     }
 
     /**

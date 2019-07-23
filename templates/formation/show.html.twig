@@ -104,7 +104,7 @@
                                             <td>{{ stagiaire.telephone }}</td>
                                             <td><img class="rounded-circle" src="{{ stagiaire.avatar }}" width="50" alt=""></td>
                                             <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"><button type="button" class="btn btn-info">Détails</button></a>
-                                                <a href="{{ path('deleteStagaire_formation', {'id': stagiaire.id}) }}"><button type="button" class="btn btn-danger">x</button></a></td>
+                                                <a href="{{ path('deleteStagaire_formation', {'idstagiaire': stagiaire.id}) }}"><button type="button" class="btn btn-danger">x</button></a></td>
                                         </tr>
                                     {% endfor %}
                                 </table>

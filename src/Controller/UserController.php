@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Categorie;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -130,18 +131,22 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/delete/categorie/{id}", name="deleteCategorie_user")
+     * @Route("/{id}/delete/categorie", name="deleteCategorie_user")
      */
-    public function deleteCategorie(ObjectManager $manager, User $user){
-        
-        $manager->removeCategory($user);
+    public function deleteCategorie(ObjectManager $manager, Categorie $categorie, UserInterface $user) {
+
+        $categorie->removeUser($user);
+
         $manager->flush();
 
-        return $this->redirectToRoute('get_all_users');
+        return $this->redirectToRoute('user', [
+            'id' => $user->getId()
+        ]);
+
     }
 
     /**
-     * @Route("/delete/{id}", name="delete_user")
+     * @Route("/{id}/delete", name="delete_user")
      */
     public function delete(ObjectManager $manager, User $user){
 

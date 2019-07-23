@@ -68,7 +68,7 @@
                             <tr>
                                 <td>{{ categorie.intitule }}</td>
                                 <td>
-                                    <a href="{{ path('show_categorie', {'id' : categorie.id})}}"><button type="button" class="btn btn-info">Détails</button></a>
+                                    <a href="{{ path('show_categorie', {'id' : categorie.id}) }}"><button type="button" class="btn btn-info">Détails</button></a>
                                     <a href="{{ path('deleteCategorie_user', {'id': categorie.id}) }}" onclick="Supp(this.href); return(false)" class="btn btn-danger">Supprimer</a>
 
                                 </td>
