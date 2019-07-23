@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Categorie;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,33 +92,29 @@ class UserController extends AbstractController
     }
 
     /**
-     * * @Route("/{id}/add/Categorie", name="addCategorie_user")
+     * @Route("/{id}/addcategorie", name="addCategorie_user")
      */
-    public function addCategorie(Request $request, ObjectManager $manager, User $user) {
+    public function addCategoriee(User $user, Request $request, ObjectManager $manager)
+    {
         
         $form = $this->createFormBuilder($user)
-                     ->add('categories', EntityType::class, [
-                        // looks for choices from this entity
-                        'class' => Categorie::class,
-                    
-                        // uses the User.username property as the visible option string
-                        'choice_label' => 'intitule'
-                    
-                        // used to render a select box, check boxes or radios
-                        // 'multiple' => true,
-                        // 'expanded' => true,
-                        ])
+                     ->add('categories', CollectionType::class, [
+                        'entry_type' => EntityType::class,
+                        'entry_options' => [
+                            'label' => "choisir :",
+                            'class' => Categorie::class,
+                            'choice_label' => "intitule"
+                        ],
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                    ])
+                     ->add('save', SubmitType::class, ['label' => 'ADD'])
+                     ->getForm();
 
-                        ->add('save', SubmitType::class, ['label' => 'ADD'])
-                        ->getForm();
-
-                     $form->handleRequest($request);
+        $this->getUser()->setPlainPassword("danstoncul");
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $user->addCategory($form->get('categories')->getData());
-
-            dump($form->get('categories')->getData());
 
             $manager->persist($user);
             $manager->flush();
@@ -129,22 +126,27 @@ class UserController extends AbstractController
 
         return $this->render('user/add_categorie.html.twig', [
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 
     /**
-     * @Route("/delete/categorie/{id}", name="deleteCategorie_user")
+     * @Route("/{id}/delete/categorie", name="deleteCategorie_user")
      */
-    public function deleteCategorie(ObjectManager $manager, User $user){
-        
-        $manager->removeCategory($user);
+    public function deleteCategorie(ObjectManager $manager, Categorie $categorie, UserInterface $user) {
+
+        $categorie->removeUser($user);
+
         $manager->flush();
 
-        return $this->redirectToRoute('get_all_users');
+        return $this->redirectToRoute('user', [
+            'id' => $user->getId()
+        ]);
+
     }
 
     /**
-     * @Route("/delete/{id}", name="delete_user")
+     * @Route("/{id}/delete", name="delete_user")
      */
     public function delete(ObjectManager $manager, User $user){
 

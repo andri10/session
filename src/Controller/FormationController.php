@@ -40,10 +40,13 @@ class FormationController extends AbstractController
 
     /**
      * @Route("/add", name="add_formation")
+     * @Route("/{id}/edit", name="edit_formation")
      */
-    public function add(Request $request, ObjectManager $manager)
+    public function add(Formation $formation = null, Request $request, ObjectManager $manager)
     {
-        $formation = new Formation();
+        if(!$formation) {
+            $formation = new Formation();
+        }
 
         $form = $this->createForm(FormationType::class, $formation);
 
@@ -53,8 +56,6 @@ class FormationController extends AbstractController
             
             $manager->persist($formation);
             $manager->flush();
-
-            dump($formation);
 
             return $this->redirectToRoute('show_formation', [
                 'id' => $formation->getId()
@@ -73,21 +74,22 @@ class FormationController extends AbstractController
     {
         
         $form = $this->createFormBuilder($formation)
-                     ->add('stagiaires', EntityType::class, [
-                        'class'=> Stagiaire::class,
-                        'attr' => [
-                            'class' => 'selectpicker'
-                         ],
-                        /* 'multiple'=> true, */
-                     ])
+                     ->add('stagiaires', CollectionType::class, [
+                        'entry_type' => EntityType::class,
+                        'entry_options' => [
+                            'label' => "choisir :",
+                            'class' => Stagiaire::class,
+                            'choice_label' => "nomPrenom"
+                        ],
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                    ])
                      ->add('save', SubmitType::class, ['label' => 'ADD'])
                      ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $formation->addStagiaire($formation);
 
             $manager->persist($formation);
             $manager->flush();
@@ -122,9 +124,25 @@ class FormationController extends AbstractController
             ]);
         }
 
+
         return $this->render('formation/addModule.html.twig', [
             'form' => $form->createView(),
             'formation' => $formation
+        ]);
+    }
+
+    /**
+     * @Route("/{idstagiaire}/delete/stagiaire", name="deleteStagaire_formation")
+     */
+    public function deleteStagaire(ObjectManager $manager, Stagiaire $stagiaire, Formation $formation)
+    {
+        
+        $stagiaire->removeFormation($formation);
+
+        $manager->flush();
+
+        return $this->redirectToRoute('show_formation', [
+            'id' => $formation->getId()
         ]);
     }
 

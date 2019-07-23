@@ -29,6 +29,9 @@
         li{
             list-style: none;
         }
+        button{
+            margin:3px;
+        }
     </style>
 
     <div class="col-lg-12 grid-margin stretch-card">
@@ -37,12 +40,12 @@
 
                 <h4 class="card-title">Ajouter les stagiaires</h4>
 
-                {# {{ form_start(form) }}
+                {{ form_start(form) }}
 
-                <input type="hidden" id="maxNb" value={{ formation.nbPlace }}></input>
+                <input type="hidden" id="maxNb" value="{{ formation.nbPlace }}"></input>
 
                 <ul id="collections" data-prototype="{{ form_row(form.stagiaires.vars.prototype)|e('html_attr') }}">
-                    {# iterate over each existing tag and render its only field: name
+                    {# iterate over each existing tag and render its only field: name #}
                     {% for stagiaire in form.stagiaires %}
                         <li id="collection">{{ form_row(stagiaire) }}</li>
                     {% endfor %}
@@ -50,9 +53,9 @@
 
                 {{ form_row(form.save) }}
 
-                {{ form_end(form, {'render_rest': false}) }} #}
-                
-                {{ form(form) }}
+                {{ form_row(form._token) }}
+
+                {{ form_end(form, {'render_rest': false}) }}
 
             </div>
         </div>
@@ -62,7 +65,7 @@
 
 {% block javascripts %}
 
-    {# {{ parent() }}
-    <script src="/js/collectionHandler.js"></script> #}
+    {{ parent() }}
+    <script src="/js/collectionHandler.js"></script>
 
 {% endblock %}

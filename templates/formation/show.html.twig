@@ -39,7 +39,7 @@
                         {% for ressource in formation.ressources %}
                         <h4>Salle : {{ ressource.intitule }}</h4>
                         {% endfor %}
-                        <a role="button" class="btn btn-outline-success" href="#"> Edit </a>
+                        <a role="button" class="btn btn-outline-success" href="{{ path('edit_formation', {'id': formation.id}) }}"> Edit </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addStagiaire_formation', {'id': formation.id}) }}"> + Stagiaire </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addModule_formation', {'id': formation.id}) }}"> + Module </a>
                     </div>
@@ -103,7 +103,8 @@
                                             <td>{{ stagiaire.mail }}</td>
                                             <td>{{ stagiaire.telephone }}</td>
                                             <td><img class="rounded-circle" src="{{ stagiaire.avatar }}" width="50" alt=""></td>
-                                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"><button type="button" class="btn btn-info">Détails</button></a></td>
+                                            <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"><button type="button" class="btn btn-info">Détails</button></a>
+                                                <a href="{{ path('deleteStagaire_formation', {'idstagiaire': stagiaire.id}) }}"><button type="button" class="btn btn-danger">x</button></a></td>
                                         </tr>
                                     {% endfor %}
                                 </table>
