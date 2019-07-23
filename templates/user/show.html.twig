@@ -26,20 +26,24 @@
 }
 </style>
 
-<div class="content-wrapper">
-  <div class="row user-profile">
-    <div class="col-lg-12 side-left d-flex align-items-stretch">
+
       <div class="row">
         <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body avatar">
               <h4 class="card-title">Info</h4>
               <hr>
+              <div class="col-md-12 text-center">
               <img class="rounded-circle" src="{{ user.avatar }}" width="100" alt="">
               <p class="name">{{ user.nom ~ ' ' ~ user.prenom }}</p>
               <p class="designation">-  Formateur  -</p>
-              <a class="d-block text-center text-dark" href="#">{{ user.email }}</a>
-              <a class="d-block text-center text-dark" href="#">{{ user.telephone }}</a>
+              </div>
+              <a class="d-block text-center text-dark" href="mailto:{{ user.email }}">{{ user.email }}</a>
+              <a class="d-block text-center text-dark" href="tel:{{ user.telephone }}">{{ user.telephone }}</a>
+              <div class="col-md-12 text-center">
+              <a href="{{ path('edit_users', {'id' : user.id}) }}">
+              <button class="btn btn-outline-danger btn-rounded waves-effect" type="button">Edit</button></a>
+              </div>
               <div class="wrapper about-user">
                 <h4 style="text-align:center" class="card-title mt-4 mb-3">À Propos</h4>
                 <hr>
