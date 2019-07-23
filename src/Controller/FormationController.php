@@ -133,7 +133,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/{idstagiaire}/delete/stagiaire", name="deleteStagaire_formation")
+     * @Route("/{id}//delete/stagiaire/{idstagiaire}", name="deleteStagaire_formation")
      * @Entity("stagiaire", expr="repository.find(idstagiaire)")
      */
     public function deleteStagaire(ObjectManager $manager, Formation $formation, Stagiaire $stagiaire)
