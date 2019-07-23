@@ -138,8 +138,11 @@
                     </a>
                 </div>
                 </li>
+                
                 <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
+                
                 <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                {% if is_granted('ROLE_USER') %}
                     <img class="img-xs rounded-circle" src="/assets/images/faces/face8.jpg" alt="Profile image"> </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <div class="dropdown-header text-center">
@@ -149,8 +152,13 @@
                     </div>
                     <a class="dropdown-item" href="{{ path('user', {'id' : app.user.id})}}" >My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
                     <a class="dropdown-item" href="{{path('logout')}}">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+                    {% else %}
+                    <a class="dropdown-item" href="{{path('login')}}">Connexion<i class="dropdown-item-icon ti-power-off"></i></a>
+                  {% endif %}  
                 </div>
+                
                 </li>
+                
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                 <span class="mdi mdi-menu"></span>
@@ -163,7 +171,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
                 <li class="nav-item nav-profile">
-                <a href="{{ path('user', {'id' : app.user.id})}}" class="nav-link">
+                <a href="#" class="nav-link">
                     <div class="profile-image">
                     <img class="img-xs rounded-circle" src="/assets/images/faces/face8.jpg" alt="profile image">
                     <div class="dot-indicator bg-success"></div>
