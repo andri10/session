@@ -117,5 +117,80 @@
         </div>
     </div>
 
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Basic Table</h4>
+<table class="table table-hover">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" style="text-align:center">Module</th>
+            <th scope="col" style="text-align:center">Nb Jours</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        {% for key, categorie in modulesByCat %}
+            <tr>
+                <th colspan="2" style="text-align:center">{{key}}</th>
+            </tr>
+            {% for duree in categorie %}
+                <tr>
+                    <td style="text-align:center">{{duree.module.intitule}}</td>
+                    <td style="text-align:center">{{duree.nbJour}}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Hoverable Table</h4>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col" style="text-align:center">Nom</th>
+            <th scope="col" style="text-align:center">Date de naissance</th>
+            <th scope="col" style="text-align:center">Mail</th>
+            <th scope="col" style="text-align:center">Télephone</th>
+            <th scope="col" style="text-align:center">Avatar</th>
+            <th scope="col" style="text-align:center">Profil</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for stagiaire in formation.stagiaires %}
+                <tr>
+                    <td>{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</td>
+                    <td>{{ stagiaire.dateNaissance|date('d/m/Y') }}</td>
+                    <td>{{ stagiaire.mail }}</td>
+                    <td>{{ stagiaire.telephone }}</td>
+                    <td><img class="rounded-circle" src="{{ stagiaire.avatar }}" width="50" alt=""></td>
+                    <td>
+                        <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">
+                            <button class="btn btn-info" type="button">Détails</button>
+                        </a>
+                        <a href="{{ path('deleteStagaire_formation', {'idstagiaire': stagiaire.id}) }}">
+                            <button class="btn btn-danger" type="button">x</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+
+                </div>
+            </div>
+        </div>
+
+
 {% endblock %}
 
