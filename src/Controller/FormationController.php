@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 /**
  * @Route("/formation")
@@ -132,9 +133,10 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/{idstagiaire}/delete/stagiaire", name="deleteStagaire_formation")
+     * @Route("/{idformation}/{idstagiaire}/delete/stagiaire", name="deleteStagaire_formation")
+     * @Entity("stagiaire", expr="repository.find(idstagiaire)")
      */
-    public function deleteStagaire(ObjectManager $manager, Stagiaire $stagiaire, Formation $formation)
+    public function deleteStagaire(ObjectManager $manager, Formation $formation, Stagiaire $stagiaire)
     {
         
         $stagiaire->removeFormation($formation);
