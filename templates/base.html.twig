@@ -47,7 +47,7 @@
         <!-- partial:../../partials/_navbar.html -->
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-            <a class="navbar-brand brand-logo" href="#">
+            <a class="navbar-brand brand-logo" href="{{path('home')}}">
                 <img src="/assets/images/Logo_dealone.png" alt="logo" /> </a>
             <a class="navbar-brand brand-logo-mini" href="#">
                 <img src="/assets/images/logo-mini.svg" alt="logo" /> </a>
@@ -147,7 +147,7 @@
                     <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
                     <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
                     </div>
-                    <a class="dropdown-item" href="{{ path('user', {'id' : app.user.id})}}">Mon Profil<span class="badge badge-pill badge-danger">2</span><i class="dropdown-item-icon ti-dashboard"></i></a>
+                    <a class="dropdown-item" href="{{ path('user', {'id' : app.user.id})}}" >My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
                     <a class="dropdown-item" href="{{path('logout')}}">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
                 </div>
                 </li>
@@ -170,7 +170,7 @@
                     </div>
                     <div class="text-wrapper">
                     <p class="profile-name">Allen Moreno</p>
-                    <p class="designation" >Utilisateur actuel</p>
+                    <p class="designation">Utilisateur actuel</p>
                     </div>
                 </a>
                 </li>
