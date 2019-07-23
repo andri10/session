@@ -39,11 +39,6 @@ class Formation
     private $dateDebut;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Ressource", inversedBy="formations")
-     */
-    private $ressources;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", inversedBy="formations")
      */
     private $stagiaires;
@@ -58,9 +53,13 @@ class Formation
      */
     private $dateFin;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Salle", inversedBy="formations")
+     */
+    private $salle;
+
     public function __construct()
     {
-        $this->ressources = new ArrayCollection();
         $this->stagiaires = new ArrayCollection();
         $this->durees = new ArrayCollection();
     }
@@ -130,34 +129,6 @@ class Formation
         return $this;
     }
 
-    /**
-     * @return Collection|Ressource[]
-     */
-    public function getRessources(): Collection
-    {
-        return $this->ressources;
-    }
-
-    public function addRessource(Ressource $ressource): self
-    {
-        if (!$this->ressources->contains($ressource)) {
-            $this->ressources[] = $ressource;
-            $ressource->addRessource($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRessource(Ressource $ressource): self
-    {
-        if ($this->ressources->contains($ressource)) {
-            $this->ressources->removeElement($ressource);
-            $ressource->removeRessource($this);
-        }
-
-        return $this;
-    }
-
     public function setStagiaires($stagiaires)
     {
         $this->stagiaires = $stagiaires;
@@ -216,6 +187,18 @@ class Formation
         if ($this->stagiaires->contains($stagiaire)) {
             $this->stagiaires->removeElement($stagiaire);
         }
+
+        return $this;
+    }
+
+    public function getSalle(): ?Salle
+    {
+        return $this->salle;
+    }
+
+    public function setSalle(?Salle $salle): self
+    {
+        $this->salle = $salle;
 
         return $this;
     }

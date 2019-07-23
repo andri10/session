@@ -21,7 +21,7 @@ class Ressource
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $intitule;
+    private $libelle;
 
     /**
      * @ORM\Column(type="integer")
@@ -29,13 +29,13 @@ class Ressource
     private $quantite;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="ressources")
+     * @ORM\OneToMany(targetEntity="App\Entity\Posseder", mappedBy="ressource")
      */
-    private $formations;
+    private $posseders;
 
     public function __construct()
     {
-        $this->formations = new ArrayCollection();
+        $this->posseders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,14 +43,14 @@ class Ressource
         return $this->id;
     }
 
-    public function getIntitule(): ?string
+    public function getLibelle(): ?string
     {
-        return $this->intitule;
+        return $this->libelle;
     }
 
-    public function setIntitule(string $intitule): self
+    public function setLibelle(string $libelle): self
     {
-        $this->intitule = $intitule;
+        $this->libelle = $libelle;
 
         return $this;
     }
@@ -67,37 +67,34 @@ class Ressource
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->intitule;
-    }
-
     /**
-     * @return Collection|Formation[]
+     * @return Collection|Posseder[]
      */
-    public function getFormations(): Collection
+    public function getPosseders(): Collection
     {
-        return $this->formations;
+        return $this->posseders;
     }
 
-    public function addFormation(Formation $formation): self
+    public function addPosseder(Posseder $posseder): self
     {
-        if (!$this->formations->contains($formation)) {
-            $this->formations[] = $formation;
-            $formation->addRessource($this);
+        if (!$this->posseders->contains($posseder)) {
+            $this->posseders[] = $posseder;
+            $posseder->setRessource($this);
         }
 
         return $this;
     }
 
-    public function removeFormation(Formation $formation): self
+    public function removePosseder(Posseder $posseder): self
     {
-        if ($this->formations->contains($formation)) {
-            $this->formations->removeElement($formation);
-            $formation->removeRessource($this);
+        if ($this->posseders->contains($posseder)) {
+            $this->posseders->removeElement($posseder);
+            // set the owning side to null (unless already changed)
+            if ($posseder->getRessource() === $this) {
+                $posseder->setRessource(null);
+            }
         }
 
         return $this;
     }
-
 }
