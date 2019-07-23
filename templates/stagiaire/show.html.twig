@@ -2,131 +2,125 @@
 
 {% block body %}
 
-<style>
-.user-profile .side-left .card .avatar img{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+  <style>
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-.user-profile .side-left .card .avatar .designation {
-    text-align: center;
-    color: #434a54;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
+    .designation {
+        text-align: center;
+        color: #434a54;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
 
-.user-profile .side-left .card .avatar .name {
-    text-align: center;
-    color: #32323d;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0;
-}
-</style>
+    .name {
+        text-align: center;
+        color: #32323d;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+  </style>
 
-<div class="content-wrapper">
-          <div class="row user-profile">
-            <div class="col-lg-4 side-left d-flex align-items-stretch">
-              <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body avatar">
-                      <h4 class="card-title">Info</h4>
-                      <hr>
-                      <img class="rounded-circle" src="{{ stagiaire.avatar }}" width="140" alt="">
-                      <p class="name">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</p>
-                      <p class="designation">-  Stagiaire  -</p>
-                      <a class="d-block text-center text-dark" href="mailto:{{ stagiaire.mail }}">{{ stagiaire.mail }}</a>
-                      <a class="d-block text-center text-dark" href="tel:{{ stagiaire.telephone }}">{{ stagiaire.telephone }}</a>
-                      <a href="{{ path('edit_stagiaire', {'id' : stagiaire.id}) }}"><button type="button" class="btn btn-outline-danger btn-rounded waves-effect">Edit</button></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 stretch-card">
-                  <div class="card">
-                    <div class="card-body overview">
-                      <div class="wrapper about-user">
-                        <h4 class="card-title mt-4 mb-3">Sessions prévues</h4>
-                        <hr>
-                        <table class="table table-hover">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="card-title">Info</h4><hr>
+
+        <img class="rounded-circle" src="{{ stagiaire.avatar }}" width="140" alt="">
+
+        <p class="name">{{ stagiaire.nom ~ ' ' ~ stagiaire.prenom }}</p>
+        <p class="designation">-  Stagiaire  -</p>
+        <a class="d-block text-center text-dark" href="mailto:{{ stagiaire.mail }}">{{ stagiaire.mail }}</a>
+        <a class="d-block text-center text-dark" href="tel:{{ stagiaire.telephone }}">{{ stagiaire.telephone }}</a>
+        <a href="{{ path('edit_stagiaire', {'id' : stagiaire.id}) }}">
+          <button class="btn btn-outline-danger btn-rounded waves-effect" type="button">Edit</button></a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+
+      <h4 class="card-title mt-4 mb-3">Sessions prévues</h4><hr>
+
+      <table class="table table-hover">
         <thead>
-            <tr>
-                <th scope="col">Intitulé</th>
-                <th scope="col">Date début</th>
-                <th scope="col">Date fin</th>
-                <th scope="col">Plus</th>
-
-            </tr>
+          <tr>
+          <th scope="col">Intitulé</th>
+          <th scope="col">Date début</th>
+          <th scope="col">Date fin</th>
+          <th scope="col">Plus</th>
+        </tr>
         </thead>
         <tbody>
-            {% for formation in stagiaire.formations %}
-                <tr>
-                    <td><small>{{ formation.intitule }}</small></td>
-                    <td>{{ formation.dateDebut | date('d/m/Y') }}</td>
-                    <td>{{ formation.dateFin | date('d/m/Y') }}</td>
-                    <td><a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">Détails</button></a></td>
-                </tr>
-            {% endfor %}  
+          {% for formation in stagiaire.formations %}
+          <tr>
+            <td><small>{{ formation.intitule }}</small></td>
+            <td>{{ formation.dateDebut | date('d/m/Y') }}</td>
+            <td>{{ formation.dateFin | date('d/m/Y') }}</td>
+            <td><a href="{{ path('show_formation', {'id' : formation.id}) }}">
+              <button class="btn btn-info" type="button">Détails</button></a></td>
+          </tr>
+          {% endfor %}
         </tbody>
-    </table>
+      </table>
+      </div>
+    </div>
+  </div>
 
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<!--
+<div class="col-lg-8 side-right stretch-card">
+<div class="card">
+  <div class="card-body">
+    <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
+      <h4 class="card-title mb-0">Details</h4>
+    </div>
+    <div class="wrapper">
+      <hr>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+          <form action="#">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Change user name">
             </div>
-            <!--
-            <div class="col-lg-8 side-right stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
-                    <h4 class="card-title mb-0">Details</h4>
-                  </div>
-                  <div class="wrapper">
-                    <hr>
-                    <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
-                        <form action="#">
-                          <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Change user name">
-                          </div>
-                          <div class="form-group">
-                            <label for="designation">Designation</label>
-                            <input type="text" class="form-control" id="designation" placeholder="Change designation">
-                          </div>
-                          <div class="form-group">
-                            <label for="mobile">Mobile Number</label>
-                            <input type="text" class="form-control" id="mobile" placeholder="Change mobile number">
-                          </div>
-                          <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Change email address">
-                          </div>
-                          <div class="form-group">
-                            <label for="address">Address</label>
-                            <textarea name="address" id="address" rows="6" class="form-control" placeholder="Change address"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label for="website">Website URL</label>
-                            <input type="text" class="form-control" id="website" placeholder="Change website url">
-                          </div>
-                          <div class="form-group mt-5">
-                            <button type="submit" class="btn btn-success mr-2">Update</button>
-                            <button class="btn btn-outline-danger">Cancel</button>
-                          </div>
-                        </form>
-                      </div>
-                      </div>
-                  </div>
-                </div>
-                -->
-              </div>
+            <div class="form-group">
+              <label for="designation">Designation</label>
+              <input type="text" class="form-control" id="designation" placeholder="Change designation">
             </div>
-          </div>
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input type="text" class="form-control" id="mobile" placeholder="Change mobile number">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Change email address">
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <textarea name="address" id="address" rows="6" class="form-control" placeholder="Change address"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="website">Website URL</label>
+              <input type="text" class="form-control" id="website" placeholder="Change website url">
+            </div>
+            <div class="form-group mt-5">
+              <button type="submit" class="btn btn-success mr-2">Update</button>
+              <button class="btn btn-outline-danger">Cancel</button>
+            </div>
+          </form>
         </div>
+        </div>
+    </div>
+  </div>
+  -->
 
 {% endblock %}
 
