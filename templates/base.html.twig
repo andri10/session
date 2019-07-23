@@ -143,12 +143,12 @@
                 
                 <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 {% if is_granted('ROLE_USER') %}
-                    <img class="img-xs rounded-circle" src="/assets/images/faces/face8.jpg" alt="Profile image"> </a>
+                    <img class="img-xs rounded-circle" src="{{ app.user.avatar }}" alt="Profile image"> </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <div class="dropdown-header text-center">
-                    <img class="img-md rounded-circle" src="/assets/images/faces/face8.jpg" alt="Profile image">
-                    <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-                    <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
+                    <img class="img-md rounded-circle" src="{{ app.user.avatar }}" alt="Profile image">
+                    <p class="mb-1 mt-3 font-weight-semibold">{{ app.user.nom  ~ ' ' ~ app.user.prenom}}</p>
+                    <p class="font-weight-light text-muted mb-0">{{ app.user.email }}</p>
                     </div>
                     <a class="dropdown-item" href="{{ path('user', {'id' : app.user.id})}}" >My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
                     <a class="dropdown-item" href="{{path('logout')}}">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
@@ -170,18 +170,22 @@
             <!-- partial:../../partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
+            {% if is_granted('ROLE_USER') %}
                 <li class="nav-item nav-profile">
-                <a href="#" class="nav-link">
+                <a href="{{ path('user', {'id' : app.user.id})}}" class="nav-link">
                     <div class="profile-image">
-                    <img class="img-xs rounded-circle" src="/assets/images/faces/face8.jpg" alt="profile image">
+                    <img class="img-xs rounded-circle" src="{{ app.user.avatar }}" alt="profile image">
                     <div class="dot-indicator bg-success"></div>
                     </div>
                     <div class="text-wrapper">
-                    <p class="profile-name">Allen Moreno</p>
+                    <p class="profile-name">{{ app.user.nom  ~ ' ' ~ app.user.prenom}}</p>
                     <p class="designation">Utilisateur actuel</p>
                     </div>
                 </a>
                 </li>
+                {% else %}
+                    
+                  {% endif %}  
                 <li class="nav-item nav-category">Menu Principal</li>
                 <li class="nav-item">
                 <a class="nav-link" href="{{ path('home') }}">
