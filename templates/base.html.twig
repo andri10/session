@@ -147,11 +147,8 @@
                     <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
                     <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
                     </div>
-                    <a class="dropdown-item">My Profile <span class="badge badge-pill badge-danger">1</span><i class="dropdown-item-icon ti-dashboard"></i></a>
-                    <a class="dropdown-item">Messages<i class="dropdown-item-icon ti-comment-alt"></i></a>
-                    <a class="dropdown-item">Activity<i class="dropdown-item-icon ti-location-arrow"></i></a>
-                    <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>
-                    <a class="dropdown-item">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+                    <a class="dropdown-item" href="{{ path('user', {'id' : app.user.id})}}">Mon Profil<span class="badge badge-pill badge-danger">2</span><i class="dropdown-item-icon ti-dashboard"></i></a>
+                    <a class="dropdown-item" href="{{path('logout')}}">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
                 </div>
                 </li>
             </ul>
@@ -166,14 +163,14 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
                 <li class="nav-item nav-profile">
-                <a href="#" class="nav-link">
+                <a href="{{ path('user', {'id' : app.user.id})}}" class="nav-link">
                     <div class="profile-image">
                     <img class="img-xs rounded-circle" src="/assets/images/faces/face8.jpg" alt="profile image">
                     <div class="dot-indicator bg-success"></div>
                     </div>
                     <div class="text-wrapper">
                     <p class="profile-name">Allen Moreno</p>
-                    <p class="designation">Utilisateur actuel</p>
+                    <p class="designation" >Utilisateur actuel</p>
                     </div>
                 </a>
                 </li>
