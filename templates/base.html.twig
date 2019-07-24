@@ -207,7 +207,7 @@
                         <a class="nav-link" href="{{path('formation')}}">Liste</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('add_formation')}}">Ajouter une formation</a>
+                        <a class="nav-link" href="{# {{ path('add_formation')}} #}">Ajouter une formation</a>
                     </li>
                     </ul>
                 </div>
@@ -225,7 +225,7 @@
                         <a class="nav-link" href="{{path('get_all_users')}}">Liste</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('add_users')}}">Ajouter un formateur</a>
+                        <a class="nav-link" href="{# {{ path('add_users')}} #}">Ajouter un formateur</a>
                     </li>
                     </ul>
                 </div>
@@ -243,7 +243,7 @@
                         <a class="nav-link" href="{{path('stagiaire')}}">Liste</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('add_stagiaire')}}">Ajouter un stagiaire</a>
+                        <a class="nav-link" href="{# {{ path('add_stagiaire') }} #}">Ajouter un stagiaire</a>
                     </li>
                     </ul>
                 </div>
@@ -294,6 +294,7 @@
                     {% endblock %}
                     
                     {% block body %}{% endblock %} 
+                </div>
                 </div>
 
             <!-- content-wrapper ends -->

@@ -92,6 +92,7 @@ class CategorieController extends AbstractController
 
         return $this->render('categorie/addModule.html.twig', [
             'form' => $form->createView(),
+            'categorie' => $categorie
         ]);
     }
 

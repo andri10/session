@@ -6,6 +6,7 @@ use App\Entity\Stagiaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class StagiaireType extends AbstractType
@@ -15,7 +16,9 @@ class StagiaireType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance')
+            ->add('dateNaissance', DateType::class, [
+                'widget' => 'single_text'
+            ])
             ->add('sexe')
             ->add('ville')
             ->add('mail')

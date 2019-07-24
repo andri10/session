@@ -1,5 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ form(form) }}
+    <style>
+        #titre{
+        text-decoration: underline;
+        }
+        #test{
+        width: 15vw;
+        display:block;
+        }
+    </style>
+
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                <a href="{{ path('ressource') }}"><button type="button" class="btn btn-light btn-fw">Retour</button> </a>               
+
+                <div class="container">
+
+                {# {% if editMode %}
+                    <h2 id="titre">Modification de salle<h2>
+                {% else %} #}
+                    <h2 id="titre">Ajouter une salle<h2>
+                {# {% endif %}    #}                 
+                <br>
+
+                    <div id="test">
+                    {{ form(form) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+
 {% endblock %}
+

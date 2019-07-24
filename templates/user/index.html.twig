@@ -30,10 +30,10 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                        <th scope="col"></th>
                         <th scope="col">FORMATEUR</th>
                         <th scope="col">MAIL</th>
                         <th scope="col">TELEPHONE</th>
-                        <th scope="col">PHOTO</th>
                         <th scope="col">FICHE PERSO</th>
                         <th scope="col">SUPPRIMER</th>
                         </tr>
@@ -41,12 +41,37 @@
                     <tbody>
                         {% for user in users %}
                             <tr>
+                            <td><img class="rounded-circle" src="{{ user.avatar }}" width="50" alt=""></td>
                             <td>{{ user.nom ~ ' ' ~ user.prenom }}</td>
                             <td>{{ user.email}}</td>
                             <td>{{ user.telephone}}</td>
-                            <td><img class="rounded-circle" src="{{ user.avatar }}" width="50" alt=""></td>
                             <td><a href="{{ path('user', {'id': user.id}) }}"><button type="button" class="btn btn-info">Voir Profil</button></a></td>
-                            <td><a href="{{ path('delete_user', {'id': user.id}) }}" onclick="Supp(this.href); return(false)"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+                            <td>
+                                <!-- Button trigger modal-->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalConfirmDelete">delete</button>
+
+                                <!--Modal: modalConfirmDelete-->
+                                <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                                    <!--Content-->
+                                    <div class="modal-content text-center">
+                                    <!--Header-->
+                                    <div class="modal-header d-flex justify-content-center">
+                                        <p class="heading">Are you sure?</p>
+                                    </div>
+
+                                    <!--Footer-->
+                                    <div class="modal-footer flex-center" style="margin:0 auto">
+                                        <a href="{{ path('delete_user', {'id': user.id}) }}" class="btn  btn-outline-danger">Yes</a>
+                                        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                                    </div>
+                                    </div>
+                                    <!--/.Content-->
+                                </div>
+                                </div>
+                                <!--Modal: modalConfirmDelete-->
+                            </td>
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -54,7 +79,6 @@
 
             </div>
         </div>
-    </div>
 
 {% endblock %}
 

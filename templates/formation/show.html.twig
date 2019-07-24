@@ -35,6 +35,7 @@
                         <a role="button" class="btn btn-outline-success" href="{{ path('edit_formation', {'id': formation.id}) }}"> Edit </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addStagiaire_formation', {'id': formation.id}) }}"> + Stagiaire </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addModule_formation', {'id': formation.id}) }}"> + Module </a>
+                        <a role="button" class="btn btn-outline-success" href="{# {{ path('addRessource_formation', {'id': formation.id}) }} #}"> + Ressource </a>
 
                 </div>
             </div>
@@ -77,12 +78,12 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col" style="text-align:center">Nom</th>
-                                <th scope="col" style="text-align:center">Date de naissance</th>
-                                <th scope="col" style="text-align:center">Mail</th>
-                                <th scope="col" style="text-align:center">Télephone</th>
-                                <th scope="col" style="text-align:center">Avatar</th>
-                                <th scope="col" style="text-align:center">Profil</th>
+                                <th >Nom</th>
+                                <th >Date de naissance</th>
+                                <th >Mail</th>
+                                <th >Télephone</th>
+                                <th >Avatar</th>
+                                <th >Profil</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,11 +99,35 @@
                                             <a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">
                                                 <button class="btn btn-info" type="button">Détails</button>
                                             </a>
-                                            <a href="{{ path('deleteStagaire_formation', {'id': formation.id, 'idstagiaire': stagiaire.id}) }}">
-                                                <button class="btn btn-danger" type="button">x</button>
-                                            </a>
+
+                                            <!-- Button trigger modal-->
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalConfirmDelete">x</button>
+
+                                            <!--Modal: modalConfirmDelete-->
+                                            <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                                                <!--Content-->
+                                                <div class="modal-content text-center">
+                                                <!--Header-->
+                                                <div class="modal-header d-flex justify-content-center">
+                                                    <p class="heading">Are you sure?</p>
+                                                </div>
+
+                                                <!--Footer-->
+                                                <div class="modal-footer flex-center" style="margin:0 auto">
+                                                    <a href="{{ path('deleteStagaire_formation', {'id': formation.id, 'idstagiaire': stagiaire.id}) }}" class="btn  btn-outline-danger">Yes</a>
+                                                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                                                </div>
+                                                </div>
+                                                <!--/.Content-->
+                                            </div>
+                                            </div>
+                                            <!--Modal: modalConfirmDelete-->
+                                            &nbsp;&nbsp;
                                             <a href="{{ path('pdf', {'id': stagiaire.id}) }}" target="_blank">pdf</a>
                                         </td>
+
                                     </tr>
                                 {% endfor %}
                             </tr>
@@ -114,7 +139,8 @@
         </div>
 
     </div>
-</div>
+
+
 
 
 {% endblock %}

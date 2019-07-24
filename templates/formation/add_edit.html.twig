@@ -1,6 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+<style>
+    #formation_dateDebut{
+        width: 8vw;
+        display:block;
+    }
+    #formation_dateFin{
+        width: 8vw;
+        display:block;
+    }
+    #formation_intitule{
+        width: 25vw;
+        display:block;
+    }
+    #formation_presentation{
+        width: 25vw;
+        display:block;
+    }
+    #formation_nbPlace{
+        width: 8vw;
+        display:block;
+    }
+    #titre{
+        text-decoration: underline;
+    }
+</style>
+
 <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -19,18 +46,25 @@
 
                 {{ form_end(form) }} #}
 
-                {{ form(form) }}
+                <a href="{{ path('formation') }}"><button type="button" class="btn btn-light btn-fw">Retour</button> </a>               
 
+                <div class="container">
+                {% if editMode %}
+                    <h2 id="titre">Modification de la formation<h2>
+                {% else %}
+                    <h2 id="titre">Création d'une nouvelle formation<h2>
+                {% endif %}
+
+                <br>
+                    {{ form(form) }}
+                
+                
+                <div>
             </div>
         </div>
     </div>
+    </div>
 
 
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script src="/js/collectionHandler.js"></script>
 
 {% endblock %}
-

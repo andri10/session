@@ -118,7 +118,8 @@ class FormationController extends AbstractController
         }
 
         return $this->render('formation/add_edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'editMode' => $formation->getId() !== null
         ]);
     }
 
@@ -145,7 +146,7 @@ class FormationController extends AbstractController
         $form->handleRequest($request);
         
         /*TODO:*/
-        
+
         /* $newStagiaires = $form['stagiaires']->getData();
         
         $stagiaires = $formation->getStagiaires();

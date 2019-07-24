@@ -53,7 +53,8 @@ class StagiaireController extends AbstractController
         }
 
         return $this->render('stagiaire/add_edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'editMode' => $stagiaire->getId() !== null
         ]);
     }
 
