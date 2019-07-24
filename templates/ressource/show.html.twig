@@ -10,5 +10,10 @@
   <h3>{{ salle.nom }}</h3>
   <h4>{{ salle.nbPlace }} places disponibles</h4>
 
+  {% for ressource in salle.posseders %}
+    {{ ressource.quantiteUse }}
+    {{ ressource.ressource.intitule }}<br>
+  {% endfor %}
+
 {% endblock %}
 
