@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <!-- plugins:css -->
+    <link href="/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/assets/vendors/iconfonts/ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="/assets/vendors/iconfonts/typicons/src/font/typicons.css" rel="stylesheet">
+    <link href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/assets/vendors/css/vendor.bundle.base.css" rel="stylesheet">
+    <link href="/assets/vendors/css/vendor.bundle.addons.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link href="/assets/css/shared/style.css" rel="stylesheet"> <!-- endinject -->
+    <!-- Layout styles -->
+    <link
+    href="/assets/css/demo_1/style.css" rel="stylesheet"> <!-- End Layout styles -->
+    <link href="/assets/images/favicon.png" rel="shortcut icon"/>
+
+{% endblock %}
+
+{% block body %}
+
+    <style>
+        li{
+            list-style: none;
+        }
+        button{
+            margin:3px;
+        }
+    </style>
+
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">Ajouter les ressources</h4>
+
+                {{ form_start(form) }}
+
+                <input type="hidden" id="maxNb" value=2></input>
+
+                <ul id="collections" data-prototype="{{ form_row(form.posseders.vars.prototype)|e('html_attr') }}">
+                    {# iterate over each existing tag and render its only field: name #}
+                    {% for ressource in form.posseders %}
+                        <li id="collection">{{ form_row(ressource) }}</li>
+                    {% endfor %}
+                </ul>
+
+                {{ form_row(form.valider) }}
+
+                {{ form_row(form._token) }}
+
+                {{ form_end(form, {'render_rest': false}) }}
+
+
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block javascripts %}
+
+        {{ parent() }}
+        <script src="/js/collectionHandler.js"></script>
+
+    {% endblock %}
+

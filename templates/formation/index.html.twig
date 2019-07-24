@@ -54,7 +54,32 @@
                             <td>
                                 <a href="{{ path('show_formation', {'id' : formation.id}) }}"><button type="button" class="btn btn-info">Plus</button></a>
                             </td>
-                            <td><a href="{{ path('delete_formation', {'id': formation.id}) }}" onclick="Supp(this.href); return(false)"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                            <td>
+                                <!-- Button trigger modal-->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalConfirmDelete">x</button>
+
+                                <!--Modal: modalConfirmDelete-->
+                                <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                                    <!--Content-->
+                                    <div class="modal-content text-center">
+                                    <!--Header-->
+                                    <div class="modal-header d-flex justify-content-center">
+                                        <p class="heading">Are you sure?</p>
+                                    </div>
+
+                                    <!--Footer-->
+                                    <div class="modal-footer flex-center" style="margin:0 auto">
+                                        <a href="{{ path('delete_formation', {'id': formation.id}) }}" class="btn  btn-outline-danger">Yes</a>
+                                        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                                    </div>
+                                    </div>
+                                    <!--/.Content-->
+                                </div>
+                                </div>
+                                <!--Modal: modalConfirmDelete-->
+                            </td>
                         </tr>
                     {% endfor %}   
                     

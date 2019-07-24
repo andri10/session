@@ -10,11 +10,11 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h3>{{ salle.libelle}}</h3>
+                        <h3>{{ salle.nom}}</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo mauris leo, non finibus nulla eleifend a. Sed nec ultricies nisi, vel condimentum dolor. Duis tincidunt consequat eros non eleifend. Suspendisse quis tristique lorem.
                         </p>
-                        <a href="{{ path('show_salle', {'id' : salle.id})}}" class="btn btn-info">Détails</a>
-                        <a href="{{ path('delete_salle', {'id' : salle.id})}}" onclick="Supp(this.href); return(false)" class="btn btn-danger">Supprimer</a>
+                        <a href="{{ path('show_salle', {'id' : salle.id}) }}" class="btn btn-info">Détails</a>
+                        <a href="{{ path('delete_salle', {'id' : salle.id}) }}" onclick="Supp(this.href); return(false)" class="btn btn-danger">Supprimer</a>
                     </div>
                 </div>
                 <br>

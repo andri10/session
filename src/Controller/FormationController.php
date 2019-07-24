@@ -95,6 +95,8 @@ class FormationController extends AbstractController
             $manager->persist($formation);
             $manager->flush();
 
+            $this->addFlash('success', 'La session a bien été crée.');
+
             return $this->redirectToRoute('show_formation', [
                 'id' => $formation->getId()
             ]);
@@ -132,6 +134,8 @@ class FormationController extends AbstractController
             $manager->persist($formation);
             $manager->flush();
 
+            $this->addFlash('success', 'add Stagiaire OK.');
+
             return $this->redirectToRoute('show_formation', [
                 'id' => $formation->getId()
             ]);
@@ -157,6 +161,8 @@ class FormationController extends AbstractController
             $manager->persist($formation);
             $manager->flush();
 
+            $this->addFlash('success', 'add Module OK.');
+
             return $this->redirectToRoute('show_formation', [
                 'id' => $formation->getId()
             ]);
@@ -180,6 +186,8 @@ class FormationController extends AbstractController
 
         $manager->flush();
 
+        $this->addFlash('success', 'delete Stagiaire OK.');
+
         return $this->redirectToRoute('show_formation', [
             'id' => $formation->getId()
         ]);
@@ -192,6 +200,8 @@ class FormationController extends AbstractController
     {
         $manager->remove($formation);
         $manager->flush();
+
+        $this->addFlash('success', 'delete Formation OK.');
 
         return $this->redirectToRoute('formation');
     }

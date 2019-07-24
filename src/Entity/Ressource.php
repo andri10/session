@@ -21,12 +21,12 @@ class Ressource
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $libelle;
+    private $intitule;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $quantite;
+    private $stock;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Posseder", mappedBy="ressource")
@@ -43,26 +43,26 @@ class Ressource
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getIntitule(): ?string
     {
-        return $this->libelle;
+        return $this->intitule;
     }
 
-    public function setLibelle(string $libelle): self
+    public function setIntitule(string $intitule): self
     {
-        $this->libelle = $libelle;
+        $this->intitule = $intitule;
 
         return $this;
     }
 
-    public function getQuantite(): ?int
+    public function getStock(): ?int
     {
-        return $this->quantite;
+        return $this->stock;
     }
 
-    public function setQuantite(int $quantite): self
+    public function setStock(int $stock): self
     {
-        $this->quantite = $quantite;
+        $this->stock = $stock;
 
         return $this;
     }

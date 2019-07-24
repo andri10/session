@@ -21,12 +21,12 @@ class Salle
     /**
      * @ORM\Column(type="string", length=25)
      */
-    private $libelle;
+    private $nom;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $nbPlaceMax;
+    private $nbPlace;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Formation", mappedBy="salle")
@@ -49,26 +49,26 @@ class Salle
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getNom(): ?string
     {
-        return $this->libelle;
+        return $this->nom;
     }
 
-    public function setLibelle(string $libelle): self
+    public function setNom(string $nom): self
     {
-        $this->libelle = $libelle;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getNbPlaceMax(): ?int
+    public function getNbPlace(): ?int
     {
-        return $this->nbPlaceMax;
+        return $this->nbPlace;
     }
 
-    public function setNbPlaceMax(int $nbPlaceMax): self
+    public function setNbPlace(int $nbPlace): self
     {
-        $this->nbPlaceMax = $nbPlaceMax;
+        $this->nbPlace = $nbPlace;
 
         return $this;
     }

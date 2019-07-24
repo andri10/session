@@ -11,8 +11,8 @@ class SalleType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('libelle', TextType::class)
-                ->add('nbPlaceMax')
+                ->add('nom', TextType::class)
+                ->add('nbPlace')
         ;
     }
 }

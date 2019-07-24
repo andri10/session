@@ -6,6 +6,7 @@ use App\Entity\Salle;
 use App\Form\SalleType;
 use App\Entity\Ressource;
 use App\Form\RessourceType;
+use App\Form\RessourcesType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,12 +14,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/salle")
+ * @Route("/ressource")
  */
-class SalleController extends AbstractController
+class RessourceController extends AbstractController
 {
     /**
-     * @Route("/", name="salle")
+     * @Route("/", name="ressource")
      */
     public function index()
     {
@@ -26,14 +27,14 @@ class SalleController extends AbstractController
         ->getRepository(Salle::class)
         ->findAll();
 
-        return $this->render('salle/index.html.twig', [
+        return $this->render('ressource/index.html.twig', [
             'controller_name' => 'SalleController',
             'salles' => $salles
         ]);
     }
 
     /**
-     * @Route("/add", name="add_salle")
+     * @Route("/salle/add", name="add_salle")
      */
     public function addSalle(Request $request, ObjectManager $manager){
 
@@ -58,39 +59,37 @@ class SalleController extends AbstractController
             ]);
         }
 
-        return $this->render('salle/add_edit.html.twig', [
-            'controller_name' => 'SalleController',
+        return $this->render('ressource/add_edit.html.twig', [
+            'controller_name' => 'RessourceController',
             'form' => $form->createView()
         ]);
     }
 
-          /**
-     * @Route("/{id}/ressource/add", name="add_ressource")
+    /**
+     * @Route("/{id}/addressource", name="addRessource_ressource")
      */
     public function addRessource(Salle $salle, Request $request, ObjectManager $manager)
     {
 
-        $ressource = new Ressource();
-
-        $form = $this->createForm(RessourceType::class, $ressource)
-        ->add('submit', SubmitType::class, ['label'=>'Ajouter', 'attr'=>['class'=>'btn-primary btn-block']]);
-
+        $form = $this->createForm(RessourcesType::class, $salle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $ressource->setSalle($salle);
-
-            $manager->persist($ressource);
+            $manager->persist($salle);
             $manager->flush();
+
+            $this->addFlash('success', 'add Ressource OK.');
 
             return $this->redirectToRoute('show_salle', [
                 'id' => $salle->getId()
             ]);
         }
 
-        return $this->render('salle/addRessource.html.twig', [
+
+        return $this->render('ressource/addRessource.html.twig', [
             'form' => $form->createView(),
+            'salle' => $salle
         ]);
     }
 
@@ -102,7 +101,7 @@ class SalleController extends AbstractController
         $manager->remove($salle);
         $manager->flush();
 
-        return $this->redirectToRoute('salle');
+        return $this->redirectToRoute('ressource');
     }
 
     /**
@@ -114,7 +113,7 @@ class SalleController extends AbstractController
         ->getRepository(Salle::class)
         ->findAll();
 
-        return $this->render('salle/show.html.twig', [
+        return $this->render('ressource/show.html.twig', [
             'salle' => $salle
         ]);
     }

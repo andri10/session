@@ -170,7 +170,6 @@
             <!-- partial:../../partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
-            {% if is_granted('ROLE_USER') %}
                 <li class="nav-item nav-profile">
                 <a href="{{ path('user', {'id' : app.user.id})}}" class="nav-link">
                     <div class="profile-image">
@@ -179,13 +178,15 @@
                     </div>
                     <div class="text-wrapper">
                     <p class="profile-name">{{ app.user.nom  ~ ' ' ~ app.user.prenom}}</p>
-                    <p class="designation">Utilisateur actuel</p>
-                    </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <p class="designation">ADMIN</p>
+                    {% else %}
+                        <p class="designation">Formateur</p>
+                    {% endif %}  
+                    </div>                
                 </a>
                 </li>
-                {% else %}
                     
-                  {% endif %}  
                 <li class="nav-item nav-category">Menu Principal</li>
                 <li class="nav-item">
                 <a class="nav-link" href="{{ path('home') }}">
@@ -255,7 +256,7 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{ path('salle') }}">
+                <a class="nav-link" href="{{ path('ressource') }}">
                     <i class="menu-icon typcn typcn-document-text"></i>
                     <span class="menu-title">Gestion des ressources</span>
                 </a>
@@ -266,32 +267,35 @@
             <!-- partial -->
             <div class="main-panel">
             
-                {% block flash %}
-                    {% for flash_message in app.session.flashbag.get('success') %}
-                        <div class="container alert alert-success" role="alert">
-                            {{ flash_message }}
-                        </div>
-                    {% endfor %}
-                    {% for flash_message in app.session.flashbag.get('info') %}
-                        <div class="container alert alert-info" role="alert">
-                            {{ flash_message }}
-                        </div>
-                    {% endfor %}
-                    {% for flash_message in app.session.flashbag.get('warning') %}
-                        <div class="container alert alert-warning" role="alert">
-                            {{ flash_message }}
-                        </div>
-                    {% endfor %}
-                    {% for flash_message in app.session.flashbag.get('danger') %}
-                        <div class="container alert alert-danger" role="alert">
-                            {{ flash_message }}
-                        </div>
-                    {% endfor %}
-                {% endblock %}
-
                 <div class="content-wrapper"> 
+                    {% block flash %}
+                    <div class="container" id="alert">
+                        {% for flash_message in app.session.flashbag.get('success') %}
+                            <div class="alert alert-success" role="alert">
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                        {% for flash_message in app.session.flashbag.get('info') %}
+                            <div class="alert alert-info" role="alert">
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                        {% for flash_message in app.session.flashbag.get('warning') %}
+                            <div class="alert alert-warning" role="alert">
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                        {% for flash_message in app.session.flashbag.get('danger') %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ flash_message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% endblock %}
+                    
                     {% block body %}{% endblock %} 
                 </div>
+
             <!-- content-wrapper ends -->
             <!-- partial:../../partials/_footer.html -->
             <footer class="footer">
@@ -305,7 +309,6 @@
         </div>
         <!-- container-scroller -->
 
-
         {% block javascripts %}
 
             <script crossorigin="anonymous" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -315,6 +318,14 @@
                 if(confirm('Confirmer la suppression ?')) {
                     document.location.href = link;
                 }}
+            </script>
+
+            <script>
+                function masquernotification()
+                    {
+                    document.getElementById("alert").innerHTML="";
+                    }
+                    window.setTimeout(masquernotification, 2500);
             </script>
 
             <!-- plugins:js -->
