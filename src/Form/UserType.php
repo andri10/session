@@ -23,13 +23,11 @@ class UserType extends AbstractType {
                     'first_options' => array('label' => 'Mot de passe'),
                     'second_options' => array('label' => 'Confirmation du mot de passe'),
                 ))
-                ->add('dateNaissance', DateType::class)
-                ->add('sexe', ChoiceType::class, [
-                    'choices'  => [
-                        'Homme' => "M",
-                        'Femme' => "F",
-                    ],
+                ->add('dateNaissance', DateType::class, [
+                    'widget' => 'single_text'
                     ])
+                ->add('sexe', TextType::class
+                    )
                 ->add('adresse', TextType::class)
                 ->add('ville', TextType::class)
                 ->add('telephone', TextType::class)

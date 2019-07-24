@@ -90,12 +90,27 @@ class FormationController extends AbstractController
 
         $form->handleRequest($request);
 
+        $dateD = $form['dateDebut']->getData();
+        $dateF = $form['dateFin']->getData();
+
         if ($form->isSubmitted() && $form->isValid()) {
             
+            if($dateF < $dateD) {
+                $this->addFlash('danger', 'La date de debut de session doit être supérieur à la date fin de session.');
+
+                return $this->render('formation/add_edit.html.twig', [
+                    'form' => $form->createView()
+                ]);
+            }
+
+            if($formation){
+                $this->addFlash('success', 'La session a bien été modifiée.');
+            } else {
+                $this->addFlash('success', 'La session a bien été crée.');
+            }
+        
             $manager->persist($formation);
             $manager->flush();
-
-            $this->addFlash('success', 'La session a bien été crée.');
 
             return $this->redirectToRoute('show_formation', [
                 'id' => $formation->getId()
@@ -126,10 +141,29 @@ class FormationController extends AbstractController
                     ])
                      ->add('save', SubmitType::class, ['label' => 'ADD'])
                      ->getForm();
-
+        
         $form->handleRequest($request);
+        
+        /*TODO:*/
+        
+        /* $newStagiaires = $form['stagiaires']->getData();
+        
+        $stagiaires = $formation->getStagiaires();
+
+        dump($stagiaires);
+        dump($newStagiaires); */
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /* if($newStagiaires !== $stagiaires) {
+                $this->addFlash('danger', 'Peut pas avoir deux fois le même stagiaire.');
+
+                return $this->render('formation/addStagiaire.html.twig', [
+                    'form' => $form->createView(),
+                    'formation' => $formation
+                ]);
+            } */
 
             $manager->persist($formation);
             $manager->flush();

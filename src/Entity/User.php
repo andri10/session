@@ -36,6 +36,7 @@ class User implements UserInterface, \Serializable {
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=250)
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
      */
     private $plainPassword;
 

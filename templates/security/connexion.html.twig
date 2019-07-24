@@ -22,9 +22,29 @@ href="/assets/css/demo_1/style.css" rel="stylesheet"> <!-- End Layout styles -->
         <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
             <div class="row w-100">
                 <div class="col-lg-4 mx-auto">
+
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            <ul class="list-unstyled mb-0">
+                                <li><span class="initialism form-error-icon badge badge-danger">Error</span> 
+                                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                    
                     <div class="auto-form-wrapper">
                         
                             {{ form(form) }}
+
+                        <div class="form-group d-flex justify-content-between">
+                            <div class="form-check form-check-flat mt-0">
+                                <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" checked> Keep me signed in </label>
+                            </div>
+
+                            <a href="#" class="text-small forgot-password text-black">Forgot Password</a>
+                        </div>
                         
                     </div>
                     <ul class="auth-footer">

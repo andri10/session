@@ -25,9 +25,13 @@ class SecurityController extends Controller {
         //
         $form = $this->get('form.factory')
                      ->createNamedBuilder(null)
-                     ->add('_username', null, ['label' => 'Email'])
-                     ->add('_password', \Symfony\Component\Form\Extension\Core\Type\PasswordType::class, ['label' => 'Mot de passe'])
-                     ->add('ok', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, ['label' => 'Ok', 'attr' => ['class' => 'btn-primary btn-block']])
+                     ->add('_username', null, ['label' => 'Email', 'attr' => [
+                        'placeholder' => 'example@mail.com'
+                     ]])
+                     ->add('_password', \Symfony\Component\Form\Extension\Core\Type\PasswordType::class, ['label' => 'Mot de passe', 'attr' => [
+                        'placeholder' => '*********'
+                     ]])
+                     ->add('ok', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, ['label' => 'Login', 'attr' => ['class' => 'btn-primary btn-block']])
                      ->getForm();
 
         return $this->render('security/connexion.html.twig', [

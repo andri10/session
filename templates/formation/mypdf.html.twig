@@ -1,18 +1,73 @@
 <style>
 
+body {
+    font-family: monospace;
+}
+
+div {
+    margin: 15px;
+    padding: 5px;
+}
+
+.titre {
+    padding: 10px;
+    border: 2px solid;
+    text-align: center;
+}
+
+.cachet {
+    width:300px;
+    height:125px;
+    border: 1px solid;
+    margin:1px 125px;
+}
+
+.lieu {
+    text-align: center;
+    font-style: italic;
+}
+
 </style>
 
-<img src="/assets/images/dashboard/DealOne/logo_transparent.png"/>
+<body>
 
-<h1>Attestation individuelle de formation</h1>
-Je, soussigné:  Louis Litt, représentant de l'organisme de formation P&H Formation,
-atteste que: Prénom du stagiaireNom du stagiaire a suivi la formation:
-Nom de la formation: Nom de ma session de formation
-Lieu de la formation: Adresse du lieu.
-Dates de la formation: du 4 mars 2019 au 25 mars 2019.
-Durée de la formation: 31.5 heures (4.5 jours).
-Type d'action de formation: Action d'adaptation et de développement des compétences des salariés
-Objectifs de la formation
- 
-Fait à Nouillork, le 15 janvier 2019
- 
+    <div>
+    <h1 class="titre" >Attestation de formation</h1>
+    <div>
+
+    <div>
+        <p>Je soussignée : Mad MAX, représentant de l'organisme <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Deal One formation</strong></p>
+    </div>
+
+    <div>
+        <p>Cachet de l'entreprise : <p>
+        <p class="cachet"> </p>
+    </div>
+
+    <br><br>
+    <div>
+        <p>Atteste que : {{ stagiaire.prenom }} {{ stagiaire.nom }} a suivi la formation 
+        <br><br>{% for formation in stagiaire.formations %}
+                    {{ formation.intitule }}
+                {% endfor %}<p>
+    </div>
+
+    <div>
+        <p>Lieu de la formation : Deal One Formation</p>
+    </div>
+
+    <div>
+        <p>Dates de la formation: du{% for formation in stagiaire.formations %}
+                                        {{ formation.dateDebut|date('d/m/Y') }} au
+                                        {{ formation.dateFin|date('d/m/Y') }}
+                                    {% endfor %}.</p>
+    </div>
+
+    <br><br>
+    <div class="lieu">
+        <p>Fait à Nouillork, le {{ "now"|date("d/m/Y") }}</p>
+    </div>
+
+</body>
