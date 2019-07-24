@@ -34,7 +34,7 @@ class Salle
     private $formations;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Posseder", mappedBy="salle")
+     * @ORM\OneToMany(targetEntity="App\Entity\Posseder", mappedBy="salle", cascade={"persist"})
      */
     private $posseders;
 
