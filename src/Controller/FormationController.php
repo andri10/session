@@ -158,10 +158,10 @@ class FormationController extends AbstractController
                             // Se réfère au toString créé
                             'choice_label' => "nomPrenom",
                             // Qu'il n'applique la réference de CollectionType mais l'autre de l'entity
-                            'by_reference' => false
+                            
                         ],
-                        'allow_add' => true,
-                        'allow_delete' => true,
+                        'by_reference' => false,
+                        'allow_add' => true
                     ])
                      ->add('save', SubmitType::class, ['label' => 'ADD'])
                      ->getForm();
@@ -272,10 +272,12 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="delete_formation")
+     * @Route("/delete", name="delete_formation")
      */
-    public function delete(Formation $formation, ObjectManager $manager)
+    public function delete(Request $request, ObjectManager $manager)
     {
+        $id = $request->query->get("id");
+        $formation = $manager->getRepository(Formation::class)->findOneBy(['id' => $id]);
         // Supprime une formation
         $manager->remove($formation);
         $manager->flush();
