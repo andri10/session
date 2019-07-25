@@ -107,7 +107,8 @@ class FormationController extends AbstractController
                 $this->addFlash('danger', 'La date de debut de session doit être supérieur à la date fin de session.');
                 // Et reste sur la vue actuelle du formulaire
                 return $this->render('formation/add_edit.html.twig', [
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'editMode' => $formation->getId() !== null
                 ]);
             }
             // Si la formation existe, il met à jour les données moidifiées
@@ -217,7 +218,7 @@ class FormationController extends AbstractController
     /**
      * @Route("/{id}/addsalle", name="addSalle_formation")
      */
-    public function addSalle(Formation $formation, Request $request, ObjectManager $manager, Salle $salle)
+    public function addSalle(Formation $formation, Request $request, ObjectManager $manager)
     {
 
         $form = $this->createFormBuilder($formation)
@@ -229,10 +230,12 @@ class FormationController extends AbstractController
                     'label'=> 'Valider'
                 ])
                 ->getForm();
-
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $salle = $form['salle']->getData();
 
             $formation->setSalle($salle);
 
@@ -245,7 +248,6 @@ class FormationController extends AbstractController
                 'id' => $formation->getId()
             ]);
         }
-
 
         return $this->render('formation/addSalle.html.twig', [
             'form' => $form->createView(),
