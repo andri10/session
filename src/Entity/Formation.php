@@ -39,7 +39,7 @@ class Formation
     private $dateDebut;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", inversedBy="formations")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Stagiaire", inversedBy="formations", cascade={"persist"})
      */
     private $stagiaires;
 

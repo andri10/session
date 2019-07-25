@@ -59,7 +59,7 @@ class Stagiaire
     private $avatar;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="stagiaires")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Formation", mappedBy="stagiaires", cascade={"persist"})
      */
     private $formations;
 

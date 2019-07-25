@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Duree;
 use App\Entity\Formation;
 use App\Entity\Stagiaire;
 use App\Form\ModulesType;
 use App\Form\FormationType;
+use Doctrine\ORM\EntityRepository;
 use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,13 +20,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 // Include Dompdf required namespaces
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/formation")
@@ -135,7 +136,13 @@ class FormationController extends AbstractController
                         'entry_options' => [
                             'label' => "choisir :",
                             'class' => Stagiaire::class,
-                            'choice_label' => "nomPrenom"
+                            'query_builder' => function (EntityRepository $er) {
+                                return $er->createQueryBuilder('s')
+                                    ->orderBy('s.nom, s.prenom', 'ASC');
+                                    
+                            },
+                            'choice_label' => "nomPrenom",
+                            'by_reference' => false
                         ],
                         'allow_add' => true,
                         'allow_delete' => true,
