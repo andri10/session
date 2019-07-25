@@ -66,7 +66,7 @@ class StagiaireController extends AbstractController
         $manager->remove($stagiaire);
         $manager->flush();
 
-        return $this->redirectToRoute('liste_stagiaire');
+        return $this->redirectToRoute('stagiaire');
     }
 
     /**
