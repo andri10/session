@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+    <!-- plugins:css -->
+    <link href="/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="/assets/vendors/iconfonts/ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="/assets/vendors/iconfonts/typicons/src/font/typicons.css" rel="stylesheet">
+    <link href="/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/assets/vendors/css/vendor.bundle.base.css" rel="stylesheet">
+    <link href="/assets/vendors/css/vendor.bundle.addons.css" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link href="/assets/css/shared/style.css" rel="stylesheet"> <!-- endinject -->
+    <!-- Layout styles -->
+    <link
+    href="/assets/css/demo_1/style.css" rel="stylesheet"> <!-- End Layout styles -->
+    <link href="/assets/images/favicon.png" rel="shortcut icon"/>
+
+{% endblock %}
+
+{% block body %}
+    <style>
+        #titre{
+        text-decoration: underline;
+        }
+        #test{
+        width: 15vw;
+        display:block;
+        }
+    </style>
+
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+                <a href="#"><button type="button" class="btn btn-light btn-fw">Retour</button> </a>               
+
+                <div class="container">
+
+                    <h2 id="titre">Ajouter une salle</h2>
+                    <br>
+
+                    <div id="test">
+                    {{ form(form) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

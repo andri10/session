@@ -32,10 +32,13 @@
                         <div class="form-group">
                             <p>{{ formation.presentation }}</p>
                         </div>
+                        <div>
+                            <h4>Salle : {{ formation.salle }}</h4>
+                        </div>
                         <a role="button" class="btn btn-outline-success" href="{{ path('edit_formation', {'id': formation.id}) }}"> Edit </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addStagiaire_formation', {'id': formation.id}) }}"> + Stagiaire </a>
                         <a role="button" class="btn btn-outline-success" href="{{ path('addModule_formation', {'id': formation.id}) }}"> + Module </a>
-                        <a role="button" class="btn btn-outline-success" href="{# {{ path('addRessource_formation', {'id': formation.id}) }} #}"> + Ressource </a>
+                        <a role="button" class="btn btn-outline-success" href="{{ path('addSalle_formation', {'id': formation.id}) }}"> + Ressource </a>
 
                 </div>
             </div>
