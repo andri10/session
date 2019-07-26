@@ -41,8 +41,10 @@
               <a class="d-block text-center text-dark" href="mailto:{{ user.email }}">{{ user.email }}</a>
               <a class="d-block text-center text-dark" href="tel:{{ user.telephone }}">{{ user.telephone }}</a>
               <div class="col-md-12 text-center">
-              <a href="{{ path('edit_users', {'id' : user.id}) }}">
-              <button class="btn btn-outline-danger btn-rounded waves-effect" type="button">Edit</button></a>
+                {% if app.user.id is same as(user.id) %}
+                  <a href="{{ path('edit_users', {'id' : user.id}) }}">
+                  <button class="btn btn-outline-danger btn-rounded waves-effect" type="button">Edit</button></a>
+                {% endif %}
               </div>
               <div class="wrapper about-user">
                 <h4 style="text-align:center" class="card-title mt-4 mb-3">À Propos</h4>
@@ -77,13 +79,17 @@
               <a href="{{ path('show_categorie', {'id' : categorie.id}) }}"><button type="button" class="btn btn-info">Détails</button></a>
               </td>
               <td>
+              {% if app.user.id is same as(user.id) %}
               <a href="{{ path('deleteCategorie_user', {'id': categorie.id}) }}" onclick="Supp(this.href); return(false)" class="btn btn-danger">Supprimer</a>
+              {% endif %}
           </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      <a href="{{ path('addCategorie_user', {'id': user.id}) }}" class="btn btn-success">Add Cat</a>
+      {% if app.user.id is same as(user.id) %}
+        <a href="{{ path('addCategorie_user', {'id': user.id}) }}" class="btn btn-success">Add Cat</a>
+      {% endif %}
       </div>
     </div>
   </div>

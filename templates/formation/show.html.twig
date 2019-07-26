@@ -27,10 +27,10 @@
             <div class="card">
                 <div class="card-body">
                 
-                    <h4 class="card-title"> {{ formation.intitule }} </h4>
+                    <h3> {{ formation.intitule }} </h3>
                         <p class="card-description"> Présentation </p>
                         <div class="form-group">
-                            <p>{{ formation.presentation }}</p>
+                            <p>Et licet quocumque oculos flexeris feminas adfatim multas spectare cirratas, quibus, si nupsissent, per aetatem ter iam nixus poterat suppetere liberorum, ad usque taedium pedibus pavimenta tergentes iactari volucriter gyris, dum exprimunt innumera simulacra, quae finxere fabulae theatrales.</p>
                         </div>
                         <div>
                             <h4>Salle : {{ formation.salle }}</h4>
@@ -103,30 +103,10 @@
                                                 <button class="btn btn-info" type="button">Détails</button>
                                             </a>
 
-                                            <!-- Button trigger modal-->
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalConfirmDelete">x</button>
+                                            <a href="{{ path('deleteStagaire_formation', {'id': formation.id, 'idstagiaire': stagiaire.id}) }}" onclick="Supp(this.href); return(false)">
+                                                <button class="btn btn-danger" type="button">x</button>
+                                            </a>
 
-                                            <!--Modal: modalConfirmDelete-->
-                                            <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-                                                <!--Content-->
-                                                <div class="modal-content text-center">
-                                                <!--Header-->
-                                                <div class="modal-header d-flex justify-content-center">
-                                                    <p class="heading">Are you sure?</p>
-                                                </div>
-
-                                                <!--Footer-->
-                                                <div class="modal-footer flex-center" style="margin:0 auto">
-                                                    <a href="{{ path('deleteStagaire_formation', {'id': formation.id, 'idstagiaire': stagiaire.id}) }}" class="btn  btn-outline-danger">Yes</a>
-                                                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
-                                                </div>
-                                                </div>
-                                                <!--/.Content-->
-                                            </div>
-                                            </div>
-                                            <!--Modal: modalConfirmDelete-->
                                             &nbsp;&nbsp;
                                             <a href="{{ path('pdf', {'id': stagiaire.id}) }}" target="_blank">pdf</a>
                                         </td>
