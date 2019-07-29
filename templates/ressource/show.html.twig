@@ -6,14 +6,25 @@
 
 <a href="{{ path('addRessource_ressource', {'id': salle.id}) }}" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true">Ajouter des ressources</a>
 <br>
+<div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
 
   <h3>{{ salle.nom }}</h3>
   <h4>{{ salle.nbPlace }} places disponibles</h4>
+
+  <br>
+  <h3>Ressources : </h3>
 
   {% for ressource in salle.posseders %}
     {{ ressource.quantiteUse }}
     {{ ressource.ressource.intitule }}<br>
   {% endfor %}
+  
+
+              
+            </div>
+        </div>
 
 {% endblock %}
 
